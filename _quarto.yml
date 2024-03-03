@@ -7,11 +7,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - text: "Project Proposal"
+        menu:
+          - text: "Project Proposal"
+            href: "Project/Proposal.html"
 
 format:
   html:
-    theme: slate
+    theme: pulse
     css: styles.css
     toc: true
 

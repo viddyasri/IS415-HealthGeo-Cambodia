@@ -1,11 +1,19 @@
 ---
-title: "IS415-HealthGeo-India"
+title: "HealthGeo India"
+date: "`r Sys.Date()`"
+highlight-style: dracula
 ---
 
-This is a Quarto website.
+## Spatial Point Pattern Analysis of Healthcare Facilities in India
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Group Members: Akshaya Natarajan, Viddyasri Subramaniam
 
-```{r}
-1 + 1
-```
+In this project, we firstly aim to gain a deeper understanding of healthcare facility distribution in India. Given the country's vast expanse and high population density, India provides a substantial dataset for analysis. By examining the placement of healthcare facilities in relation to population distribution, we mainly aim to gain insights into the general and specific accessibility of healthcare across various regions, including towns, villages, and states. This, by extension, can also shed light on other human development indicators, such as literacy rates, nutrition levels, and mortality rates, in different Indian localities.
+
+We aim to execute our analysis via a three pronged approach:
+
+-   Exploratory Data Analysis of the aspatial and geospatial data
+
+-   Network Constrained Kernel Density Estimation of healthcare facilities
+
+-   Spatial Autocorrelation of healthcare facilities

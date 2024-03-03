@@ -1,0 +1,129 @@
+---
+title: "Project Proposal"
+execute: 
+  warning: false
+date: "`r Sys.Date()`"
+highlight-style: dracula
+---
+
+## Spatial Point Pattern Analysis of Healthcare Facilities in India
+
+![](/Images/Hospital%20building-cuate.png){width="464"}
+
+### **1. Background**
+
+Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of India, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.
+
+India's healthcare landscape is characterized by significant regional variations, with urban areas often benefiting from a more robust healthcare infrastructure compared to remote and rural regions. The lack of accessibility to healthcare facilities in certain areas can pose a formidable challenge, hindering the timely diagnosis and treatment of diseases. This spatial imbalance contributes to disparities in health outcomes, particularly affecting vulnerable populations who may face barriers in reaching medical services.
+
+### **2. Motivation**
+
+Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as India, where disparities in healthcare access persist, there is an urgent need to address these inequalities.
+
+Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.
+
+The importance of healthcare accessibility extends beyond crisis response to encompass long-term health planning and community resilience. It directly influences preventive measures, such as immunization campaigns and health education initiatives, by ensuring that these interventions reach the intended populations. Furthermore, accessibility plays a crucial role in reducing the burden on tertiary care facilities, promoting early detection, and fostering a healthcare system that is responsive to the needs of diverse communities.
+
+### **3. Objectives**
+
+-   Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across distinct regions in India, including the South, North, West, and East.
+
+-   Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.
+
+-   Provide actionable insights for healthcare planning and resource allocation.
+
+### **4. Data**
+
+This project will utilize a number of data sets, which are:
+
+-   Healthcare facility locations
+-   Population information
+-   Road network data
+-   India boundary layer
+
+### **5. Features**
+
+**Exploratory Data Analysis and Geo-visualization:**
+
+This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities through interactive point maps and choropleth maps. This visual representation aids in identifying spatial patterns, potential gaps, and areas with concentrated healthcare resources.
+
+**Network Constrained Kernel Density Estimation:**
+
+This feature aims to offer insights into healthcare facility accessibility based on the road network, allowing users to identify areas where access is constrained or optimal. This analysis aids in pinpointing regions where improvements in transportation infrastructure can enhance healthcare accessibility, contributing to more efficient and equitable healthcare delivery.
+
+**Spatial Autocorrelation:**
+
+This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). This information guides targeted interventions, enabling policymakers to prioritize resource allocation and interventions in areas with the greatest need.
+
+### **6. Literature Review**
+
+#### 6.1 Assessing the availability of primary health care services in Chamarajanagara district using kernel density estimation 
+
+**Aim Of Study:**
+
+To assess the availability of Primary Health Centers in Chamarajanagara District using Kernel Density Estimation (KDE) for assessing population coverage of health services.
+
+**Methodology**:
+
+It calculates accessibility ratios such as Population to Primary Health Centre (PHC) and Population to Health Workforce using Kernel Density Estimation (KDE). 
+
+**Learning Points**:\
+1.  *Use of KDE:* It emphasizes the use of Kernel Density Estimation (KDE) to spread discrete facility location data over a continuous space, which could improve the representation of healthcare service availability and accessibility. KDE can consider the relationship between the population and healthcare facilities more effectively, providing a continuous surface representation that is not limited by administrative boundaries.
+
+2\. *Healthcare Accessibility Assessment:* It illustrates how KDE can be used to calculate population-to-facility or staffing ratios, which can inform potential healthcare accessibility and could be beneficial for healthcare service planning.
+
+[Link to source](https://www.academia.edu/12613301/ASSESSING_THE_AVAILABILITY_OF_PRIMARY_HEALTH_CARE_SERVICES_IN_CHAMARAJANAGARA_DISTRICT_USING_KERNEL_DENSITY_ESTIMATION)
+
+#### 6.2 Spatial autocorrelation analysis of health care hotspots in Taiwan in 2006
+
+**Aim Of Study:**
+
+1\. To develop a method to ascertain the spatial clustering of the 20 leading healthcare events, using medical data collected by the Taiwan National Health Insurance (NHI) agency.
+
+2\. To investigate the potential spatial risk factors contributing to these healthcare events and to redefine epidemiologic data with spatial references.
+
+**Methodology**:
+
+It utilizes spatial autocorrelation methodologies, including Global Moran's I and Local Getis-Ord statistics, to describe and map spatial clusters, and areas in which these are situated, for the 20 leading causes of death in Taiwan. In addition, it uses the fit to a logistic regression model to test the characteristics of similarity and dissimilarity by gender.
+
+**Learning Points**:
+
+1\. *Spatial Autocorrelation:* The paper shows how to assess spatial autocorrelation using Global Moran's I statistic;  we may use this to determine which areas in our study have a high or low density of healthcare facilities.
+
+2\. *Local Spatial Clusters:* By using the Local G-statistic (Gi\*) to find local spatial clusters of healthcare events, we can determine the precise locations of concentrated healthcare facilities
+
+3\. *Incorporation of Demographic Data:* The study integrates demographic data for more accurate health event mapping, which is essential for considering population distribution in your accessibility analysis.
+
+[Link to source](https://bmcpublichealth.biomedcentral.com/articles/10.1186/1471-2458-9-464)
+
+### **7. Application Architecture**
+
+![](/Images/archi.jpg)
+
+### **8. User Interface - First Draft**
+
+Homepage:
+
+![](/Images/1.png)
+
+Feature Tab:
+
+![](/Images/2.jpg)
+
+### **9. Project Timeline (Week 9 - 14)**
+
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 9***                     | In week one, we focus on data exploration, seeking additional aspatial data to enhance our research. This involves crucial data cleaning tasks, including CRS conversion and eliminating invalid or empty entries. Explanatory data analysis findings will be presented on Shiny for accessibility and interpretation. |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 10***                    | Continuing with Exploratory Data Analysis (EDA), we'll showcase the feature on Shiny.                                                                                                                                                                                                                                  |
+|                                  |                                                                                                                                                                                                                                                                                                                        |
+|                                  | Additionally, we'll conduct Network Kernel Density Estimation (NKDE) to analyze the distribution of healthcare facilities along roads, and the results will also be integrated into the Shiny platform.                                                                                                                |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 11***                    | Continuing with Network Kernel Density Estimation (NKDE) on Shiny, we'll also explore clustering using autocorrelation. Transitioning to global spatial autocorrelation, we aim to identify patterns of potential clustering or dispersion, contributing valuable insights to our research.                            |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 12***                    | We'll delve into local spatial autocorrelation to pinpoint specific locations exhibiting clustering or dispersion. These insights will be seamlessly integrated into Shiny, empowering users to identify and analyze areas with distinct patterns of clustering within our research.                                   |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 13***                    | This week, we will focus on local spatial autocorrelation, emphasizing the significance of clustering as a key feature in our analysis.                                                                                                                                                                                |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ***Week 14***                    | Concluding our application, we will conduct hotspot and coldspot analysis to delve even deeper into specific locations. Additionally, we will diligently work on completing essential deliverables, including the poster, to ensure a comprehensive submission.                                                        |
++----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

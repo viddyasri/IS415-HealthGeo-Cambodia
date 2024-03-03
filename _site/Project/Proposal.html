@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>IS415-HealthGeo-India - Project Proposal</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">IS415-HealthGeo-India</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project-proposal" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Project Proposal</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-project-proposal">    
+        <li>
+    <a class="dropdown-item" href="../Project/Proposal.html" rel="" target="">
+ <span class="dropdown-text">Project Proposal</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#spatial-point-pattern-analysis-of-healthcare-facilities-in-india" id="toc-spatial-point-pattern-analysis-of-healthcare-facilities-in-india" class="nav-link active" data-scroll-target="#spatial-point-pattern-analysis-of-healthcare-facilities-in-india">Spatial Point Pattern Analysis of Healthcare Facilities in India</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><strong>1. Background</strong></a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><strong>2. Motivation</strong></a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><strong>3. Objectives</strong></a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><strong>4. Data</strong></a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features"><strong>5. Features</strong></a></li>
+  <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review"><strong>6. Literature Review</strong></a></li>
+  <li><a href="#application-architecture" id="toc-application-architecture" class="nav-link" data-scroll-target="#application-architecture"><strong>7. Application Architecture</strong></a></li>
+  <li><a href="#user-interface---first-draft" id="toc-user-interface---first-draft" class="nav-link" data-scroll-target="#user-interface---first-draft"><strong>8. User Interface - First Draft</strong></a></li>
+  <li><a href="#project-timeline-week-9---14" id="toc-project-timeline-week-9---14" class="nav-link" data-scroll-target="#project-timeline-week-9---14"><strong>9. Project Timeline (Week 9 - 14)</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project Proposal</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="spatial-point-pattern-analysis-of-healthcare-facilities-in-india" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-point-pattern-analysis-of-healthcare-facilities-in-india">Spatial Point Pattern Analysis of Healthcare Facilities in India</h2>
+<p><img src="..\Images/Hospital building-cuate.png" class="img-fluid" width="464"></p>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background"><strong>1. Background</strong></h3>
+<p>Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of India, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.</p>
+<p>India’s healthcare landscape is characterized by significant regional variations, with urban areas often benefiting from a more robust healthcare infrastructure compared to remote and rural regions. The lack of accessibility to healthcare facilities in certain areas can pose a formidable challenge, hindering the timely diagnosis and treatment of diseases. This spatial imbalance contributes to disparities in health outcomes, particularly affecting vulnerable populations who may face barriers in reaching medical services.</p>
+</section>
+<section id="motivation" class="level3">
+<h3 class="anchored" data-anchor-id="motivation"><strong>2. Motivation</strong></h3>
+<p>Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as India, where disparities in healthcare access persist, there is an urgent need to address these inequalities.</p>
+<p>Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.</p>
+<p>The importance of healthcare accessibility extends beyond crisis response to encompass long-term health planning and community resilience. It directly influences preventive measures, such as immunization campaigns and health education initiatives, by ensuring that these interventions reach the intended populations. Furthermore, accessibility plays a crucial role in reducing the burden on tertiary care facilities, promoting early detection, and fostering a healthcare system that is responsive to the needs of diverse communities.</p>
+</section>
+<section id="objectives" class="level3">
+<h3 class="anchored" data-anchor-id="objectives"><strong>3. Objectives</strong></h3>
+<ul>
+<li><p>Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across distinct regions in India, including the South, North, West, and East.</p></li>
+<li><p>Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.</p></li>
+<li><p>Provide actionable insights for healthcare planning and resource allocation.</p></li>
+</ul>
+</section>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data"><strong>4. Data</strong></h3>
+<p>This project will utilize a number of data sets, which are:</p>
+<ul>
+<li>Healthcare facility locations</li>
+<li>Population information</li>
+<li>Road network data</li>
+<li>India boundary layer</li>
+</ul>
+</section>
+<section id="features" class="level3">
+<h3 class="anchored" data-anchor-id="features"><strong>5. Features</strong></h3>
+<p><strong>Exploratory Data Analysis and Geo-visualization:</strong></p>
+<p>This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities through interactive point maps and choropleth maps. This visual representation aids in identifying spatial patterns, potential gaps, and areas with concentrated healthcare resources.</p>
+<p><strong>Network Constrained Kernel Density Estimation:</strong></p>
+<p>This feature aims to offer insights into healthcare facility accessibility based on the road network, allowing users to identify areas where access is constrained or optimal. This analysis aids in pinpointing regions where improvements in transportation infrastructure can enhance healthcare accessibility, contributing to more efficient and equitable healthcare delivery.</p>
+<p><strong>Spatial Autocorrelation:</strong></p>
+<p>This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). This information guides targeted interventions, enabling policymakers to prioritize resource allocation and interventions in areas with the greatest need.</p>
+</section>
+<section id="literature-review" class="level3">
+<h3 class="anchored" data-anchor-id="literature-review"><strong>6. Literature Review</strong></h3>
+<section id="assessing-the-availability-of-primary-health-care-services-in-chamarajanagara-district-using-kernel-density-estimation" class="level4">
+<h4 class="anchored" data-anchor-id="assessing-the-availability-of-primary-health-care-services-in-chamarajanagara-district-using-kernel-density-estimation">6.1 Assessing the availability of primary health care services in Chamarajanagara district using kernel density estimation&nbsp;</h4>
+<p><strong>Aim Of Study:</strong></p>
+<p>To assess the availability of Primary Health Centers in Chamarajanagara District using Kernel Density Estimation (KDE) for assessing population coverage of health services.</p>
+<p><strong>Methodology</strong>:</p>
+<p>It calculates accessibility ratios such as Population to Primary Health Centre (PHC) and Population to Health Workforce using Kernel Density Estimation (KDE).&nbsp;</p>
+<p><strong>Learning Points</strong>:<br>
+1.&nbsp; <em>Use of KDE:</em> It emphasizes the use of Kernel Density Estimation (KDE) to spread discrete facility location data over a continuous space, which could improve the representation of healthcare service availability and accessibility. KDE can consider the relationship between the population and healthcare facilities more effectively, providing a continuous surface representation that is not limited by administrative boundaries.</p>
+<p>2. <em>Healthcare Accessibility Assessment:</em> It illustrates how KDE can be used to calculate population-to-facility or staffing ratios, which can inform potential healthcare accessibility and could be beneficial for healthcare service planning.</p>
+<p><a href="https://www.academia.edu/12613301/ASSESSING_THE_AVAILABILITY_OF_PRIMARY_HEALTH_CARE_SERVICES_IN_CHAMARAJANAGARA_DISTRICT_USING_KERNEL_DENSITY_ESTIMATION">Link to source</a></p>
+</section>
+<section id="spatial-autocorrelation-analysis-of-health-care-hotspots-in-taiwan-in-2006" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-autocorrelation-analysis-of-health-care-hotspots-in-taiwan-in-2006">6.2 Spatial autocorrelation analysis of health care hotspots in Taiwan in 2006</h4>
+<p><strong>Aim Of Study:</strong></p>
+<p>1. To develop a method to ascertain the spatial clustering of the 20 leading healthcare events, using medical data collected by the Taiwan National Health Insurance (NHI) agency.</p>
+<p>2. To investigate the potential spatial risk factors contributing to these healthcare events and to redefine epidemiologic data with spatial references.</p>
+<p><strong>Methodology</strong>:</p>
+<p>It utilizes spatial autocorrelation methodologies, including Global Moran’s I and Local Getis-Ord statistics, to describe and map spatial clusters, and areas in which these are situated, for the 20 leading causes of death in Taiwan. In addition, it uses the fit to a logistic regression model to test the characteristics of similarity and dissimilarity by gender.</p>
+<p><strong>Learning Points</strong>:</p>
+<p>1. <em>Spatial Autocorrelation:</em> The paper shows how to assess spatial autocorrelation using Global Moran’s I statistic;&nbsp; we may use this to determine which areas in our study have a high or low density of healthcare facilities.</p>
+<p>2. <em>Local Spatial Clusters:</em> By using the Local G-statistic (Gi*) to find local spatial clusters of healthcare events, we can determine the precise locations of concentrated healthcare facilities</p>
+<p>3. <em>Incorporation of Demographic Data:</em> The study integrates demographic data for more accurate health event mapping, which is essential for considering population distribution in your accessibility analysis.</p>
+<p><a href="https://bmcpublichealth.biomedcentral.com/articles/10.1186/1471-2458-9-464">Link to source</a></p>
+</section>
+</section>
+<section id="application-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="application-architecture"><strong>7. Application Architecture</strong></h3>
+<p><img src="..\Images/archi.jpg" class="img-fluid"></p>
+</section>
+<section id="user-interface---first-draft" class="level3">
+<h3 class="anchored" data-anchor-id="user-interface---first-draft"><strong>8. User Interface - First Draft</strong></h3>
+<p>Homepage:</p>
+<p><img src="..\Images/1.png" class="img-fluid"></p>
+<p>Feature Tab:</p>
+<p><img src="..\Images/2.jpg" class="img-fluid"></p>
+</section>
+<section id="project-timeline-week-9---14" class="level3">
+<h3 class="anchored" data-anchor-id="project-timeline-week-9---14"><strong>9. Project Timeline (Week 9 - 14)</strong></h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 89%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong><em>Week 9</em></strong></td>
+<td>In week one, we focus on data exploration, seeking additional aspatial data to enhance our research. This involves crucial data cleaning tasks, including CRS conversion and eliminating invalid or empty entries. Explanatory data analysis findings will be presented on Shiny for accessibility and interpretation.</td>
+</tr>
+<tr class="even">
+<td><strong><em>Week 10</em></strong></td>
+<td><p>Continuing with Exploratory Data Analysis (EDA), we’ll showcase the feature on Shiny.</p>
+<p>Additionally, we’ll conduct Network Kernel Density Estimation (NKDE) to analyze the distribution of healthcare facilities along roads, and the results will also be integrated into the Shiny platform.</p></td>
+</tr>
+<tr class="odd">
+<td><strong><em>Week 11</em></strong></td>
+<td>Continuing with Network Kernel Density Estimation (NKDE) on Shiny, we’ll also explore clustering using autocorrelation. Transitioning to global spatial autocorrelation, we aim to identify patterns of potential clustering or dispersion, contributing valuable insights to our research.</td>
+</tr>
+<tr class="even">
+<td><strong><em>Week 12</em></strong></td>
+<td>We’ll delve into local spatial autocorrelation to pinpoint specific locations exhibiting clustering or dispersion. These insights will be seamlessly integrated into Shiny, empowering users to identify and analyze areas with distinct patterns of clustering within our research.</td>
+</tr>
+<tr class="odd">
+<td><strong><em>Week 13</em></strong></td>
+<td>This week, we will focus on local spatial autocorrelation, emphasizing the significance of clustering as a key feature in our analysis.</td>
+</tr>
+<tr class="even">
+<td><strong><em>Week 14</em></strong></td>
+<td>Concluding our application, we will conduct hotspot and coldspot analysis to delve even deeper into specific locations. Additionally, we will diligently work on completing essential deliverables, including the poster, to ensure a comprehensive submission.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
