@@ -1,6 +1,6 @@
 ---
 title: "HealthGeo India"
-date: "`r Sys.Date()`"
+date: 3 March 2024
 highlight-style: dracula
 ---
 
