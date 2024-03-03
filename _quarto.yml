@@ -11,6 +11,10 @@ website:
         menu:
           - text: "Project Proposal"
             href: "Project/Proposal.html"
+    right:
+      - icon: github
+        href: https://github.com
+        aria-label: GitHub
 
 format:
   html:
