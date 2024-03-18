@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#spatial-point-pattern-analysis-of-healthcare-facilities-in-india" id="toc-spatial-point-pattern-analysis-of-healthcare-facilities-in-india" class="nav-link active" data-scroll-target="#spatial-point-pattern-analysis-of-healthcare-facilities-in-india">Spatial Point Pattern Analysis of Healthcare Facilities in India</a>
+  <li><a href="#spatial-point-pattern-analysis-of-healthcare-facilities-in-cambodia" id="toc-spatial-point-pattern-analysis-of-healthcare-facilities-in-cambodia" class="nav-link active" data-scroll-target="#spatial-point-pattern-analysis-of-healthcare-facilities-in-cambodia">Spatial Point Pattern Analysis of Healthcare Facilities in Cambodia</a>
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><strong>1. Background</strong></a></li>
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><strong>2. Motivation</strong></a></li>
@@ -161,24 +161,24 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="spatial-point-pattern-analysis-of-healthcare-facilities-in-india" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-point-pattern-analysis-of-healthcare-facilities-in-india">Spatial Point Pattern Analysis of Healthcare Facilities in India</h2>
+<section id="spatial-point-pattern-analysis-of-healthcare-facilities-in-cambodia" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-point-pattern-analysis-of-healthcare-facilities-in-cambodia">Spatial Point Pattern Analysis of Healthcare Facilities in Cambodia</h2>
 <p><img src="..\Images/Hospital building-cuate.png" class="img-fluid" width="464"></p>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background"><strong>1. Background</strong></h3>
-<p>Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of India, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.</p>
-<p>India’s healthcare landscape is characterized by significant regional variations, with urban areas often benefiting from a more robust healthcare infrastructure compared to remote and rural regions. The lack of accessibility to healthcare facilities in certain areas can pose a formidable challenge, hindering the timely diagnosis and treatment of diseases. This spatial imbalance contributes to disparities in health outcomes, particularly affecting vulnerable populations who may face barriers in reaching medical services.</p>
+<p>Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of Cambodia, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.</p>
+<p>In Cambodia, the healthcare landscape exhibits significant variations across regions, where urban areas often boast more robust healthcare infrastructure compared to remote and rural regions. This disparity in accessibility to healthcare facilities presents a considerable challenge, potentially impeding prompt diagnosis and treatment of illnesses. Such spatial inequalities contribute to divergent health outcomes, particularly impacting marginalized populations who encounter obstacles in accessing medical services.</p>
 </section>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation"><strong>2. Motivation</strong></h3>
-<p>Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as India, where disparities in healthcare access persist, there is an urgent need to address these inequalities.</p>
+<p>Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as Cambodia, where disparities in healthcare access persist, there is an urgent need to address these inequalities.</p>
 <p>Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.</p>
 <p>The importance of healthcare accessibility extends beyond crisis response to encompass long-term health planning and community resilience. It directly influences preventive measures, such as immunization campaigns and health education initiatives, by ensuring that these interventions reach the intended populations. Furthermore, accessibility plays a crucial role in reducing the burden on tertiary care facilities, promoting early detection, and fostering a healthcare system that is responsive to the needs of diverse communities.</p>
 </section>
 <section id="objectives" class="level3">
 <h3 class="anchored" data-anchor-id="objectives"><strong>3. Objectives</strong></h3>
 <ul>
-<li><p>Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across distinct regions in India, including the South, North, West, and East.</p></li>
+<li><p>Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across regions of different sizes in Cambodia - provinces, districts, communes, and villages.</p></li>
 <li><p>Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.</p></li>
 <li><p>Provide actionable insights for healthcare planning and resource allocation.</p></li>
 </ul>
@@ -187,10 +187,22 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="data"><strong>4. Data</strong></h3>
 <p>This project will utilize a number of data sets, which are:</p>
 <ul>
-<li>Healthcare facility locations</li>
+<li>Healthcare facility locations
+<ul>
+<li>healthcenter</li>
+<li>healthpost</li>
+<li>nationalhospital</li>
+<li>referralhospital</li>
+</ul></li>
 <li>Population information</li>
 <li>Road network data</li>
-<li>India boundary layer</li>
+<li>Cambodia boundary layer
+<ul>
+<li>Level 1 - Province</li>
+<li>Level 2 - District</li>
+<li>Level 3 - Commune</li>
+<li>Level 4 - Village</li>
+</ul></li>
 </ul>
 </section>
 <section id="features" class="level3">

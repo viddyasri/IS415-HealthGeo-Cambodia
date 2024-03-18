@@ -6,19 +6,19 @@ date: 3 March 2024
 highlight-style: dracula
 ---
 
-## Spatial Point Pattern Analysis of Healthcare Facilities in India
+## Spatial Point Pattern Analysis of Healthcare Facilities in Cambodia
 
 ![](/Images/Hospital%20building-cuate.png){width="464"}
 
 ### **1. Background**
 
-Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of India, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.
+Access to healthcare facilities is a cornerstone of public health, playing a critical role in disease prevention, timely intervention, and the overall enhancement of health outcomes. The accessibility of healthcare services is a multifaceted concept encompassing geographical proximity, transportation infrastructure, and the availability of diverse medical facilities. In the context of Cambodia, a nation marked by diversity and a vast population, understanding the dynamics of healthcare accessibility becomes paramount for effective public health management.
 
-India's healthcare landscape is characterized by significant regional variations, with urban areas often benefiting from a more robust healthcare infrastructure compared to remote and rural regions. The lack of accessibility to healthcare facilities in certain areas can pose a formidable challenge, hindering the timely diagnosis and treatment of diseases. This spatial imbalance contributes to disparities in health outcomes, particularly affecting vulnerable populations who may face barriers in reaching medical services.
+In Cambodia, the healthcare landscape exhibits significant variations across regions, where urban areas often boast more robust healthcare infrastructure compared to remote and rural regions. This disparity in accessibility to healthcare facilities presents a considerable challenge, potentially impeding prompt diagnosis and treatment of illnesses. Such spatial inequalities contribute to divergent health outcomes, particularly impacting marginalized populations who encounter obstacles in accessing medical services.
 
 ### **2. Motivation**
 
-Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as India, where disparities in healthcare access persist, there is an urgent need to address these inequalities.
+Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as Cambodia, where disparities in healthcare access persist, there is an urgent need to address these inequalities.
 
 Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.
 
@@ -26,7 +26,7 @@ The importance of healthcare accessibility extends beyond crisis response to enc
 
 ### **3. Objectives**
 
--   Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across distinct regions in India, including the South, North, West, and East.
+-   Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across regions of different sizes in Cambodia - provinces, districts, communes, and villages.
 
 -   Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.
 
@@ -37,9 +37,17 @@ The importance of healthcare accessibility extends beyond crisis response to enc
 This project will utilize a number of data sets, which are:
 
 -   Healthcare facility locations
+    -   healthcenter
+    -   healthpost
+    -   nationalhospital
+    -   referralhospital
 -   Population information
 -   Road network data
--   India boundary layer
+-   Cambodia boundary layer
+    -   Level 1 - Province
+    -   Level 2 - District
+    -   Level 3 - Commune
+    -   Level 4 - Village
 
 ### **5. Features**
 
