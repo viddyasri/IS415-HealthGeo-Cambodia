@@ -166,7 +166,7 @@ tm_shape(lisa) +
 For the purpose of the app, users will have the option to pick the Local Moran's I statistic that they want to plot, as well as the data classification style and the simulations to derive contiguity spatial weight matrix.
 :::
 
-## LISA Map:
+## LISA Map
 
 ```{r}
 lisa_sig <- lisa  %>%
