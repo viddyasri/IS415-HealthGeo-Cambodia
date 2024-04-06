@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-06">
+
+<title>IS415-HealthGeo-Cambodia - Spatial Autocorrelation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IS415-HealthGeo-Cambodia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Project/Proposal.html" rel="" target="">
+ <span class="menu-text">Project Overview</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-prototype-of-features" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Prototype of Features</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-prototype-of-features">    
+        <li class="dropdown-header">Exploratory Data Analysis</li>
+        <li class="dropdown-header">Network Constrained Spatial Point Pattern Analysis</li>
+        <li>
+    <a class="dropdown-item" href="../../Prototype/SpatialAutocorrlation.html" rel="" target="">
+ <span class="dropdown-text">Spatial Autocorrelation</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#installing-and-loading-r-packages" id="toc-installing-and-loading-r-packages" class="nav-link active" data-scroll-target="#installing-and-loading-r-packages">Installing and Loading R Packages</a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data</a></li>
+  <li><a href="#global-spatial-autocorrelation" id="toc-global-spatial-autocorrelation" class="nav-link" data-scroll-target="#global-spatial-autocorrelation">Global Spatial Autocorrelation</a>
+  <ul class="collapse">
+  <li><a href="#morans-i" id="toc-morans-i" class="nav-link" data-scroll-target="#morans-i">Moran’s I</a></li>
+  <li><a href="#gearys-c" id="toc-gearys-c" class="nav-link" data-scroll-target="#gearys-c">Geary’s C</a></li>
+  </ul></li>
+  <li><a href="#local-spatial-autocorrelation" id="toc-local-spatial-autocorrelation" class="nav-link" data-scroll-target="#local-spatial-autocorrelation">Local Spatial Autocorrelation</a>
+  <ul class="collapse">
+  <li><a href="#local-morans-i" id="toc-local-morans-i" class="nav-link" data-scroll-target="#local-morans-i">Local Moran’s I</a></li>
+  </ul></li>
+  <li><a href="#lisa-map" id="toc-lisa-map" class="nav-link" data-scroll-target="#lisa-map">LISA Map:</a>
+  <ul class="collapse">
+  <li><a href="#getis-ord-gi-statistics" id="toc-getis-ord-gi-statistics" class="nav-link" data-scroll-target="#getis-ord-gi-statistics">Getis-Ord Gi* Statistics</a></li>
+  </ul></li>
+  <li><a href="#hcsa-map" id="toc-hcsa-map" class="nav-link" data-scroll-target="#hcsa-map">HCSA Map</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Spatial Autocorrelation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 6, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="installing-and-loading-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-loading-r-packages">Installing and Loading R Packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse, tmap, sfdep, spdep, lubridate, plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data">Importing Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>facilities_sum_by_province <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_rds</span>(<span class="st">"rds/facilities_sum_by_province.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="global-spatial-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="global-spatial-autocorrelation">Global Spatial Autocorrelation</h2>
+<p>Global spatial autocorrelation assesses whether similar values tend to be clustered together (positive spatial autocorrelation) or dispersed apart (negative spatial autocorrelation) in space. Two commonly used measures for assessing global spatial autocorrelation are Moran’s I and Geary’s C.</p>
+<section id="morans-i" class="level3">
+<h3 class="anchored" data-anchor-id="morans-i">Moran’s I</h3>
+<p>First, we ensure there is no missing data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>facilities_sum_by_province <span class="ot">&lt;-</span> <span class="fu">subset</span>(facilities_sum_by_province, PROVINCE <span class="sc">!=</span> <span class="st">"Tbong Khmum"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>facilities_sum_by_province <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>geometry), <span class="sc">~</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(.), <span class="st">"None"</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 24 features and 14 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
+Projected CRS: WGS 84 / UTM zone 48N
+First 10 features:
+   ID_0 ISO   NAME_0 ID_1           NAME_1 HASC_1 CCN_1 CCA_1 TYPE_1 ENGTYPE_1
+1    40 KHM Cambodia    1 Bântéay Méanchey  KH.OM     0  None   Khêt  Province
+2    40 KHM Cambodia    2       Batdâmbâng  KH.BA     0  None   Khêt  Province
+3    40 KHM Cambodia    3           Kâmpôt  KH.KP     0  None   Khêt  Province
+4    40 KHM Cambodia    4     Kâmpóng Cham  KH.KM     0  None   Khêt  Province
+5    40 KHM Cambodia    5  Kâmpóng Chhnang  KH.KG     0  None   Khêt  Province
+6    40 KHM Cambodia    6      Kâmpóng Spœ  KH.KS     0  None   Khêt  Province
+7    40 KHM Cambodia    7     Kâmpóng Thum  KH.KT     0  None   Khêt  Province
+8    40 KHM Cambodia    8           Kândal  KH.KN     0  None   Khêt  Province
+9    40 KHM Cambodia    9        Kaôh Kong  KH.KK     0  None   Khêt  Province
+10   40 KHM Cambodia   10              Kep     KH     0  None   Khêt  Province
+   NL_NAME_1                               VARNAME_1         PROVINCE
+1       None                      Banteay Mean Cheay Banteay Meanchey
+2       None    Battambang|Baat Dambang|Bat Dâm Bâng       Batdambang
+3       None                                    None           Kampot
+4       None              Kampong Chaam|Kompong Cham     Kampong Cham
+5       None                          Kompong Chnang  Kampong Chhnang
+6       None Kampong Speu|Kompong Speu|Kompong Spueu     Kampong Spoe
+7       None               Kampong Thom|Kompong Thom     Kampong Thum
+8       None                                 Kandaal           Kandal
+9       None                                Koh Kong        Kaoh Kong
+10      None                                     Keb              Kep
+   FACILITIES_SUM                       geometry
+1              71 MULTIPOLYGON (((288944.1 15...
+2              81 MULTIPOLYGON (((249907.2 14...
+3              52 MULTIPOLYGON (((408632.1 11...
+4             145 MULTIPOLYGON (((578664.2 13...
+5              39 MULTIPOLYGON (((443815.2 13...
+6              53 MULTIPOLYGON (((414125.8 13...
+7              53 MULTIPOLYGON (((559078.1 14...
+8              94 MULTIPOLYGON (((479410.6 13...
+9              17 MULTIPOLYGON (((268234.6 10...
+10              5 MULTIPOLYGON (((422531.3 11...</code></pre>
+</div>
+</div>
+<p>Next, we derive contiguity and assign weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wm_q <span class="ot">&lt;-</span> <span class="fu">poly2nb</span>(facilities_sum_by_province, <span class="at">queen=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wm_q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Neighbour list object:
+Number of regions: 24 
+Number of nonzero links: 90 
+Percentage nonzero weights: 15.625 
+Average number of links: 3.75 
+Link number distribution:
+
+1 2 3 4 5 6 7 
+4 2 5 4 4 4 1 
+4 least connected regions:
+10 12 16 23 with 1 link
+1 most connected region:
+7 with 7 links</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rswm_q <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(wm_q, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">style=</span><span class="st">"W"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rswm_q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Characteristics of weights list object:
+Neighbour list object:
+Number of regions: 24 
+Number of nonzero links: 90 
+Percentage nonzero weights: 15.625 
+Average number of links: 3.75 
+
+Weights style: W 
+Weights constants summary:
+   n  nn S0       S1       S2
+W 24 576 24 15.64349 103.7165</code></pre>
+</div>
+</div>
+<p>Then, we compute Monte Carlo Moran’s I:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>moran_result<span class="ot">=</span><span class="fu">moran.mc</span>(facilities_sum_by_province<span class="sc">$</span>FACILITIES_SUM, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">listw=</span>rswm_q, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nsim=</span><span class="dv">99</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">zero.policy =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">na.action=</span>na.omit)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>moran_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Monte-Carlo simulation of Moran I
+
+data:  facilities_sum_by_province$FACILITIES_SUM 
+weights: rswm_q  
+number of simulations + 1: 100 
+
+statistic = 0.18934, observed rank = 97, p-value = 0.03
+alternative hypothesis: greater</code></pre>
+</div>
+</div>
+<p>Visualising Monte Carlo Moran’s I:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>hist_color <span class="ot">&lt;-</span> <span class="st">"#69b3a2"</span>  </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>          line_color <span class="ot">&lt;-</span> <span class="st">"red"</span>      </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">hist</span>(moran_result<span class="sc">$</span>res, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">freq =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="dv">20</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> hist_color,             </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">border =</span> <span class="st">"white"</span>,            </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab =</span> <span class="st">"Simulated Moran's I"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">"Histogram of Simulated Moran's I"</span>)  </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">col =</span> line_color, <span class="at">lwd =</span> <span class="dv">2</span>) </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Moran's I = 0"</span>), <span class="at">col =</span> <span class="fu">c</span>(line_color), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="gearys-c" class="level3">
+<h3 class="anchored" data-anchor-id="gearys-c">Geary’s C</h3>
+<p>We compute Monte Carlo Geary’s C using the same contiguity derived earlier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>geary_result<span class="ot">=</span><span class="fu">geary.mc</span>(facilities_sum_by_province<span class="sc">$</span>FACILITIES_SUM,  </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">listw=</span>rswm_q, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nsim=</span><span class="dv">99</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>geary_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Monte-Carlo simulation of Geary C
+
+data:  facilities_sum_by_province$FACILITIES_SUM 
+weights: rswm_q 
+number of simulations + 1: 100 
+
+statistic = 0.80401, observed rank = 16, p-value = 0.16
+alternative hypothesis: greater</code></pre>
+</div>
+</div>
+<p>Visualising Monte Carlo Geary’s C:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>hist_color <span class="ot">&lt;-</span> <span class="st">"#69b3a2"</span>  </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>          line_color <span class="ot">&lt;-</span> <span class="st">"red"</span>      </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">hist</span>(geary_result<span class="sc">$</span>res, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">freq =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="dv">20</span>, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> hist_color,             </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">border =</span> <span class="st">"white"</span>,            </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab =</span> <span class="st">"Simulated Geary c"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">"Histogram of Simulated Geary's C"</span>)  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>          <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">1</span>, <span class="at">col =</span> line_color, <span class="at">lwd =</span> <span class="dv">2</span>) </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Geary's C = 1"</span>), <span class="at">col =</span> <span class="fu">c</span>(line_color), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the purpose of the app, users will have the option to choose between Moran’s I and Geary’s C, the number of Monte Carlo simulations for each measure as well as the number of bins for plotting this histogram.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="local-spatial-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="local-spatial-autocorrelation">Local Spatial Autocorrelation</h2>
+<p>Unlike global spatial autocorrelation, which assesses the overall tendency for similar values to cluster together or disperse apart across the entire study area, local spatial autocorrelation examines spatial patterns at a more localized level. Two commonly used measures for assessing local spatial autocorrelation include Local Moran’s I and Getis-Ord Gi* statistics.</p>
+<section id="local-morans-i" class="level3">
+<h3 class="anchored" data-anchor-id="local-morans-i">Local Moran’s I</h3>
+<p>First, we derive contiguity:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wm_q <span class="ot">&lt;-</span> facilities_sum_by_province <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">nb =</span> <span class="fu">st_contiguity</span>(geometry),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">wt =</span> <span class="fu">st_weights</span>(nb,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">style =</span> <span class="st">"W"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.before =</span> <span class="dv">1</span>) </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>wm_q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 24 features and 16 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
+Projected CRS: WGS 84 / UTM zone 48N
+First 10 features:
+                         nb
+1                 2, 15, 21
+2             1, 12, 17, 21
+3          6, 9, 10, 13, 24
+4           5, 7, 8, 11, 19
+5            4, 6, 7, 8, 17
+6        3, 5, 8, 9, 17, 24
+7  4, 5, 11, 17, 18, 21, 22
+8       4, 5, 6, 16, 19, 24
+9              3, 6, 13, 17
+10                        3
+                                                                            wt
+1                                              0.3333333, 0.3333333, 0.3333333
+2                                                       0.25, 0.25, 0.25, 0.25
+3                                                      0.2, 0.2, 0.2, 0.2, 0.2
+4                                                      0.2, 0.2, 0.2, 0.2, 0.2
+5                                                      0.2, 0.2, 0.2, 0.2, 0.2
+6             0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667
+7  0.1428571, 0.1428571, 0.1428571, 0.1428571, 0.1428571, 0.1428571, 0.1428571
+8             0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667
+9                                                       0.25, 0.25, 0.25, 0.25
+10                                                                           1
+   ID_0 ISO   NAME_0 ID_1           NAME_1 HASC_1 CCN_1 CCA_1 TYPE_1 ENGTYPE_1
+1    40 KHM Cambodia    1 Bântéay Méanchey  KH.OM     0  &lt;NA&gt;   Khêt  Province
+2    40 KHM Cambodia    2       Batdâmbâng  KH.BA     0  &lt;NA&gt;   Khêt  Province
+3    40 KHM Cambodia    3           Kâmpôt  KH.KP     0  &lt;NA&gt;   Khêt  Province
+4    40 KHM Cambodia    4     Kâmpóng Cham  KH.KM     0  &lt;NA&gt;   Khêt  Province
+5    40 KHM Cambodia    5  Kâmpóng Chhnang  KH.KG     0  &lt;NA&gt;   Khêt  Province
+6    40 KHM Cambodia    6      Kâmpóng Spœ  KH.KS     0  &lt;NA&gt;   Khêt  Province
+7    40 KHM Cambodia    7     Kâmpóng Thum  KH.KT     0  &lt;NA&gt;   Khêt  Province
+8    40 KHM Cambodia    8           Kândal  KH.KN     0  &lt;NA&gt;   Khêt  Province
+9    40 KHM Cambodia    9        Kaôh Kong  KH.KK     0  &lt;NA&gt;   Khêt  Province
+10   40 KHM Cambodia   10              Kep     KH     0  &lt;NA&gt;   Khêt  Province
+   NL_NAME_1                               VARNAME_1         PROVINCE
+1       &lt;NA&gt;                      Banteay Mean Cheay Banteay Meanchey
+2       &lt;NA&gt;    Battambang|Baat Dambang|Bat Dâm Bâng       Batdambang
+3       &lt;NA&gt;                                    &lt;NA&gt;           Kampot
+4       &lt;NA&gt;              Kampong Chaam|Kompong Cham     Kampong Cham
+5       &lt;NA&gt;                          Kompong Chnang  Kampong Chhnang
+6       &lt;NA&gt; Kampong Speu|Kompong Speu|Kompong Spueu     Kampong Spoe
+7       &lt;NA&gt;               Kampong Thom|Kompong Thom     Kampong Thum
+8       &lt;NA&gt;                                 Kandaal           Kandal
+9       &lt;NA&gt;                                Koh Kong        Kaoh Kong
+10      &lt;NA&gt;                                     Keb              Kep
+   FACILITIES_SUM                       geometry
+1              71 MULTIPOLYGON (((288944.1 15...
+2              81 MULTIPOLYGON (((249907.2 14...
+3              52 MULTIPOLYGON (((408632.1 11...
+4             145 MULTIPOLYGON (((578664.2 13...
+5              39 MULTIPOLYGON (((443815.2 13...
+6              53 MULTIPOLYGON (((414125.8 13...
+7              53 MULTIPOLYGON (((559078.1 14...
+8              94 MULTIPOLYGON (((479410.6 13...
+9              17 MULTIPOLYGON (((268234.6 10...
+10              5 MULTIPOLYGON (((422531.3 11...</code></pre>
+</div>
+</div>
+<p>Then, we compute Local Moran’s I:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lisa <span class="ot">&lt;-</span> wm_q <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">local_moran =</span> <span class="fu">local_moran</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            FACILITIES_SUM, nb, wt, <span class="at">nsim =</span> <span class="dv">99</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">unnest</span>(local_moran)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>lisa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 24 features and 28 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
+Projected CRS: WGS 84 / UTM zone 48N
+# A tibble: 24 × 29
+         ii      eii  var_ii    z_ii   p_ii p_ii_sim p_folded_sim skewness
+      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  0.214   -0.0872  0.166    0.741  0.459      0.48         0.24   0.669 
+ 2 -0.00247 -0.0501  0.320    0.0841 0.933      0.82         0.41   0.536 
+ 3 -0.0589   0.0139  0.00451 -1.08   0.279      0.28         0.14   0.283 
+ 4  1.48    -0.298   1.28     1.58   0.115      0.18         0.09   0.231 
+ 5 -0.207   -0.00595 0.0135  -1.73   0.0830     0.12         0.06  -0.0935
+ 6  0.0298  -0.00979 0.00389  0.634  0.526      0.48         0.24   0.235 
+ 7  0.0373  -0.00544 0.00432  0.650  0.516      0.54         0.27   0.155 
+ 8  1.09    -0.0190  0.289    2.06   0.0390     0.08         0.04   0.424 
+ 9  0.213   -0.0651  0.206    0.612  0.541      0.64         0.33  -0.183 
+10 -0.181    0.131   1.37    -0.267  0.789      0.76         0.38  -1.34  
+# ℹ 14 more rows
+# ℹ 21 more variables: kurtosis &lt;dbl&gt;, mean &lt;fct&gt;, median &lt;fct&gt;, pysal &lt;fct&gt;,
+#   nb &lt;nb&gt;, wt &lt;list&gt;, ID_0 &lt;dbl&gt;, ISO &lt;chr&gt;, NAME_0 &lt;chr&gt;, ID_1 &lt;dbl&gt;,
+#   NAME_1 &lt;chr&gt;, HASC_1 &lt;chr&gt;, CCN_1 &lt;dbl&gt;, CCA_1 &lt;chr&gt;, TYPE_1 &lt;chr&gt;,
+#   ENGTYPE_1 &lt;chr&gt;, NL_NAME_1 &lt;chr&gt;, VARNAME_1 &lt;chr&gt;, PROVINCE &lt;chr&gt;,
+#   FACILITIES_SUM &lt;int&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</code></pre>
+</div>
+</div>
+<p>Visualising values of Local Moran’s I:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(lisa) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"ii"</span>) <span class="sc">+</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set.zoom.limits =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"Local Moran's I of GDPPC"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(lisa) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"p_ii"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="dv">1</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.001"</span>, <span class="st">"0.01"</span>, <span class="st">"0.05"</span>, <span class="st">"Not sig"</span>)) <span class="sc">+</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"p-value of Local Moran's I"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the purpose of the app, users will have the option to pick the Local Moran’s I statistic that they want to plot, as well as the data classification style and the simulations to derive contiguity spatial weight matrix.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="lisa-map" class="level2">
+<h2 class="anchored" data-anchor-id="lisa-map">LISA Map:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lisa_sig <span class="ot">&lt;-</span> lisa  <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p_ii <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(lisa) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">id=</span><span class="st">"PROVINCE"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(lisa_sig) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"mean"</span>, <span class="at">id=</span><span class="st">"PROVINCE"</span>) <span class="sc">+</span> </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="getis-ord-gi-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="getis-ord-gi-statistics">Getis-Ord Gi* Statistics</h3>
+<p>Gi* statistics are distance-based spatial statistics. Hence, distance methods are required instead of contiguity methods to derive the spatial weight matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wm_idw <span class="ot">&lt;-</span> facilities_sum_by_province <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">nb =</span> <span class="fu">st_contiguity</span>(geometry),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">wts =</span> <span class="fu">st_inverse_distance</span>(nb, geometry,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">scale =</span> <span class="dv">1</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">alpha =</span> <span class="dv">1</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>wm_idw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 24 features and 16 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
+Projected CRS: WGS 84 / UTM zone 48N
+First 10 features:
+                         nb
+1                 2, 15, 21
+2             1, 12, 17, 21
+3          6, 9, 10, 13, 24
+4           5, 7, 8, 11, 19
+5            4, 6, 7, 8, 17
+6        3, 5, 8, 9, 17, 24
+7  4, 5, 11, 17, 18, 21, 22
+8       4, 5, 6, 16, 19, 24
+9              3, 6, 13, 17
+10                        3
+                                                                                                wts
+1                                                          1.017073e-05, 1.539264e-05, 9.185003e-06
+2                                            1.017073e-05, 1.502025e-05, 1.342133e-05, 9.603265e-06
+3                              1.146869e-05, 9.084303e-06, 3.321504e-05, 1.555795e-05, 1.889056e-05
+4                              1.362965e-05, 1.217940e-05, 1.214877e-05, 8.982280e-06, 1.145273e-05
+5                              1.362965e-05, 1.369902e-05, 1.189533e-05, 9.844541e-06, 1.076453e-05
+6                1.146869e-05, 1.369902e-05, 1.187042e-05, 1.257002e-05, 8.828817e-06, 1.102309e-05
+7  1.217940e-05, 1.189533e-05, 8.316100e-06, 7.149182e-06, 9.759527e-06, 8.053985e-06, 5.958687e-06
+8                1.214877e-05, 9.844541e-06, 1.187042e-05, 4.236501e-05, 2.104978e-05, 1.758677e-05
+9                                            9.084303e-06, 1.257002e-05, 1.232858e-05, 8.741503e-06
+10                                                                                     3.321504e-05
+   ID_0 ISO   NAME_0 ID_1           NAME_1 HASC_1 CCN_1 CCA_1 TYPE_1 ENGTYPE_1
+1    40 KHM Cambodia    1 Bântéay Méanchey  KH.OM     0  &lt;NA&gt;   Khêt  Province
+2    40 KHM Cambodia    2       Batdâmbâng  KH.BA     0  &lt;NA&gt;   Khêt  Province
+3    40 KHM Cambodia    3           Kâmpôt  KH.KP     0  &lt;NA&gt;   Khêt  Province
+4    40 KHM Cambodia    4     Kâmpóng Cham  KH.KM     0  &lt;NA&gt;   Khêt  Province
+5    40 KHM Cambodia    5  Kâmpóng Chhnang  KH.KG     0  &lt;NA&gt;   Khêt  Province
+6    40 KHM Cambodia    6      Kâmpóng Spœ  KH.KS     0  &lt;NA&gt;   Khêt  Province
+7    40 KHM Cambodia    7     Kâmpóng Thum  KH.KT     0  &lt;NA&gt;   Khêt  Province
+8    40 KHM Cambodia    8           Kândal  KH.KN     0  &lt;NA&gt;   Khêt  Province
+9    40 KHM Cambodia    9        Kaôh Kong  KH.KK     0  &lt;NA&gt;   Khêt  Province
+10   40 KHM Cambodia   10              Kep     KH     0  &lt;NA&gt;   Khêt  Province
+   NL_NAME_1                               VARNAME_1         PROVINCE
+1       &lt;NA&gt;                      Banteay Mean Cheay Banteay Meanchey
+2       &lt;NA&gt;    Battambang|Baat Dambang|Bat Dâm Bâng       Batdambang
+3       &lt;NA&gt;                                    &lt;NA&gt;           Kampot
+4       &lt;NA&gt;              Kampong Chaam|Kompong Cham     Kampong Cham
+5       &lt;NA&gt;                          Kompong Chnang  Kampong Chhnang
+6       &lt;NA&gt; Kampong Speu|Kompong Speu|Kompong Spueu     Kampong Spoe
+7       &lt;NA&gt;               Kampong Thom|Kompong Thom     Kampong Thum
+8       &lt;NA&gt;                                 Kandaal           Kandal
+9       &lt;NA&gt;                                Koh Kong        Kaoh Kong
+10      &lt;NA&gt;                                     Keb              Kep
+   FACILITIES_SUM                       geometry
+1              71 MULTIPOLYGON (((288944.1 15...
+2              81 MULTIPOLYGON (((249907.2 14...
+3              52 MULTIPOLYGON (((408632.1 11...
+4             145 MULTIPOLYGON (((578664.2 13...
+5              39 MULTIPOLYGON (((443815.2 13...
+6              53 MULTIPOLYGON (((414125.8 13...
+7              53 MULTIPOLYGON (((559078.1 14...
+8              94 MULTIPOLYGON (((479410.6 13...
+9              17 MULTIPOLYGON (((268234.6 10...
+10              5 MULTIPOLYGON (((422531.3 11...</code></pre>
+</div>
+</div>
+<p>Then, we compute Local Gi*:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>HCSA <span class="ot">&lt;-</span> wm_idw <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">local_Gi =</span> <span class="fu">local_gstar_perm</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    FACILITIES_SUM, nb, wt, <span class="at">nsim =</span> <span class="dv">99</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(local_Gi)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>HCSA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 24 features and 24 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
+Projected CRS: WGS 84 / UTM zone 48N
+# A tibble: 24 × 25
+   gi_star   e_gi   var_gi p_value  p_sim p_folded_sim skewness kurtosis nb   
+     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;nb&gt; 
+ 1   0.867 0.0451 0.000137   0.739 0.460          0.46     0.23    0.595 &lt;int&gt;
+ 2   0.489 0.0431 0.000132   0.396 0.692          0.64     0.32    1.40  &lt;int&gt;
+ 3  -0.867 0.0424 0.000154  -0.811 0.417          0.4      0.2     0.934 &lt;int&gt;
+ 4   2.52  0.0518 0.000101   1.70  0.0893         0.12     0.06    0.523 &lt;int&gt;
+ 5   1.89  0.0423 0.000110   1.89  0.0590         0.1      0.05    0.252 &lt;int&gt;
+ 6   0.526 0.0431 0.000117   0.336 0.737          0.7      0.35    0.500 &lt;int&gt;
+ 7   0.706 0.0428 0.000115   0.474 0.636          0.66     0.33    0.559 &lt;int&gt;
+ 8   2.68  0.0466 0.000103   2.08  0.0378         0.08     0.04    0.595 &lt;int&gt;
+ 9  -0.908 0.0362 0.000126  -0.494 0.621          0.72     0.35    0.632 &lt;int&gt;
+10  -0.795 0.0235 0.000237   0.114 0.909          0.78     0.42    1.14  &lt;int&gt;
+# ℹ 14 more rows
+# ℹ 16 more variables: wts &lt;list&gt;, ID_0 &lt;dbl&gt;, ISO &lt;chr&gt;, NAME_0 &lt;chr&gt;,
+#   ID_1 &lt;dbl&gt;, NAME_1 &lt;chr&gt;, HASC_1 &lt;chr&gt;, CCN_1 &lt;dbl&gt;, CCA_1 &lt;chr&gt;,
+#   TYPE_1 &lt;chr&gt;, ENGTYPE_1 &lt;chr&gt;, NL_NAME_1 &lt;chr&gt;, VARNAME_1 &lt;chr&gt;,
+#   PROVINCE &lt;chr&gt;, FACILITIES_SUM &lt;int&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</code></pre>
+</div>
+</div>
+<p>Visualising Local Gi*:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(HCSA) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"gi_star"</span>) <span class="sc">+</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set.zoom.limits =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"Gi* of Healthcare Facilities"</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$tm_layout
+$tm_layout$main.title
+[1] "Gi* of Healthcare Facilities"
+
+$tm_layout$main.title.size
+[1] 0.8
+
+$tm_layout$style
+[1] NA
+
+
+attr(,"class")
+[1] "tm"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(HCSA) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"p_value"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="dv">1</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.001"</span>, <span class="st">"0.01"</span>, <span class="st">"0.05"</span>, <span class="st">"Not sig"</span>)) <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"p-value of Gi*"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the purpose of the app, users will have the option to pick the Gi* statistic that they want to plot, as well as the data classification style and the simulations to derive the distance spatial weight matrix.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="hcsa-map" class="level2">
+<h2 class="anchored" data-anchor-id="hcsa-map">HCSA Map</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>HCSA_sig <span class="ot">&lt;-</span> HCSA  <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p_sim <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(HCSA) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(HCSA_sig) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"gi_star"</span>) <span class="sc">+</span> </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="SpatialAutocorrelation_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

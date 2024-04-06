@@ -1,0 +1,248 @@
+---
+title: "Spatial Autocorrelation"
+execute: 
+  warning: false
+date: 6 April 2024
+highlight-style: dracula
+---
+
+## Installing and Loading R Packages
+
+```{r}
+pacman::p_load(sf, tidyverse, tmap, sfdep, spdep, lubridate, plotly)
+```
+
+## Importing Data
+
+```{r}
+facilities_sum_by_province <- readr::read_rds("rds/facilities_sum_by_province.rds")
+```
+
+## Global Spatial Autocorrelation
+
+Global spatial autocorrelation assesses whether similar values tend to be clustered together (positive spatial autocorrelation) or dispersed apart (negative spatial autocorrelation) in space. Two commonly used measures for assessing global spatial autocorrelation are Moran's I and Geary's C.
+
+### Moran's I
+
+First, we ensure there is no missing data:
+
+```{r}
+facilities_sum_by_province <- subset(facilities_sum_by_province, PROVINCE != "Tbong Khmum")
+facilities_sum_by_province %>%
+  mutate_at(vars(-geometry), ~ifelse(is.na(.), "None", .))
+```
+
+Next, we derive contiguity and assign weights:
+
+```{r}
+wm_q <- poly2nb(facilities_sum_by_province, queen=TRUE)
+
+summary(wm_q)
+```
+
+```{r}
+rswm_q <- nb2listw(wm_q, 
+                   style="W", 
+                   zero.policy = TRUE)
+rswm_q
+```
+
+Then, we compute Monte Carlo Moran’s I:
+
+```{r}
+set.seed(1234)
+
+moran_result=moran.mc(facilities_sum_by_province$FACILITIES_SUM, 
+                          listw=rswm_q, 
+                          nsim=99, 
+                          zero.policy = TRUE, 
+                          na.action=na.omit)
+moran_result
+```
+
+Visualising Monte Carlo Moran’s I:
+
+```{r}
+hist_color <- "#69b3a2"  
+          line_color <- "red"      
+          
+          hist(moran_result$res, 
+               freq = TRUE, 
+               breaks = 20, 
+               col = hist_color,             
+               border = "white",            
+               xlab = "Simulated Moran's I",
+               main = "Histogram of Simulated Moran's I")  
+          
+          abline(v = 0, col = line_color, lwd = 2) 
+          legend("topright", legend = c("Moran's I = 0"), col = c(line_color), lwd = c(2), bty = "n")
+```
+
+### Geary's C
+
+We compute Monte Carlo Geary’s C using the same contiguity derived earlier.
+
+```{r}
+geary_result=geary.mc(facilities_sum_by_province$FACILITIES_SUM,  
+                         listw=rswm_q, 
+                         nsim=99)
+geary_result
+```
+
+Visualising Monte Carlo Geary’s C:
+
+```{r}
+hist_color <- "#69b3a2"  
+          line_color <- "red"      
+          
+          hist(geary_result$res, 
+               freq = TRUE, 
+               breaks = 20, 
+               col = hist_color,             
+               border = "white",            
+               xlab = "Simulated Geary c",
+               main = "Histogram of Simulated Geary's C")  
+          
+          abline(v = 1, col = line_color, lwd = 2) 
+          legend("topright", legend = c("Geary's C = 1"), col = c(line_color), lwd = c(2), bty = "n")
+```
+
+::: callout-note
+For the purpose of the app, users will have the option to choose between Moran's I and Geary's C, the number of Monte Carlo simulations for each measure as well as the number of bins for plotting this histogram.
+:::
+
+## Local Spatial Autocorrelation
+
+Unlike global spatial autocorrelation, which assesses the overall tendency for similar values to cluster together or disperse apart across the entire study area, local spatial autocorrelation examines spatial patterns at a more localized level. Two commonly used measures for assessing local spatial autocorrelation include Local Moran's I and Getis-Ord Gi* statistics.
+
+### Local Moran's I
+
+First, we derive contiguity:
+
+```{r}
+wm_q <- facilities_sum_by_province %>%
+          mutate(nb = st_contiguity(geometry),
+                 wt = st_weights(nb,
+                                 style = "W"),
+                 .before = 1) 
+wm_q
+```
+
+Then, we compute Local Moran's I:
+
+```{r}
+lisa <- wm_q %>% 
+          mutate(local_moran = local_moran(
+            FACILITIES_SUM, nb, wt, nsim = 99),
+            .before = 1) %>%
+          unnest(local_moran)
+lisa
+```
+
+Visualising values of Local Moran's I:
+
+```{r}
+tmap_mode("plot")
+tm_shape(lisa) +
+  tm_fill("ii") + 
+  tm_borders(alpha = 0.5) +
+  tm_view(set.zoom.limits = c(6,8)) +
+  tm_layout(main.title = "Local Moran's I of GDPPC",
+            main.title.size = 0.8)
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(lisa) +
+  tm_fill("p_ii",
+          breaks = c(0, 0.001, 0.01, 0.05, 1),
+              labels = c("0.001", "0.01", "0.05", "Not sig")) + 
+  tm_borders(alpha = 0.5) +
+  tm_layout(main.title = "p-value of Local Moran's I",
+            main.title.size = 0.8)
+```
+
+::: callout-note
+For the purpose of the app, users will have the option to pick the Local Moran's I statistic that they want to plot, as well as the data classification style and the simulations to derive contiguity spatial weight matrix.
+:::
+
+## LISA Map:
+
+```{r}
+lisa_sig <- lisa  %>%
+  filter(p_ii < 0.05)
+tmap_mode("plot")
+tm_shape(lisa) +
+  tm_polygons(id="PROVINCE") +
+  tm_borders(alpha = 0.5) +
+  tm_shape(lisa_sig) +
+  tm_fill("mean", id="PROVINCE") + 
+  tm_borders(alpha = 0.4)
+```
+
+### Getis-Ord Gi* Statistics
+
+Gi* statistics are distance-based spatial statistics. Hence, distance methods are required instead of contiguity methods to derive the spatial weight matrix.
+
+```{r}
+wm_idw <- facilities_sum_by_province %>%
+          mutate(nb = st_contiguity(geometry),
+                 wts = st_inverse_distance(nb, geometry,
+                                           scale = 1,
+                                           alpha = 1),
+                 .before = 1)
+wm_idw
+```
+
+Then, we compute Local Gi*:
+
+```{r}
+HCSA <- wm_idw %>%
+  mutate(local_Gi = local_gstar_perm(
+    FACILITIES_SUM, nb, wt, nsim = 99),
+    .before = 1) %>%
+  unnest(local_Gi)
+
+HCSA
+```
+
+Visualising Local Gi*:
+
+```{r}
+tmap_mode("plot")
+tm_shape(HCSA) +
+  tm_fill("gi_star") + 
+  tm_borders(alpha = 0.5) +
+  tm_view(set.zoom.limits = c(6,8))
+  tm_layout(main.title = "Gi* of Healthcare Facilities",
+            main.title.size = 0.8)
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(HCSA) +
+  tm_fill("p_value",
+          breaks = c(0, 0.001, 0.01, 0.05, 1),
+              labels = c("0.001", "0.01", "0.05", "Not sig")) + 
+  tm_borders(alpha = 0.5) +
+  tm_layout(main.title = "p-value of Gi*",
+            main.title.size = 0.8)
+```
+
+::: callout-note
+For the purpose of the app, users will have the option to pick the Gi* statistic that they want to plot, as well as the data classification style and the simulations to derive the distance spatial weight matrix.
+:::
+
+## HCSA Map
+
+```{r}
+HCSA_sig <- HCSA  %>%
+  filter(p_sim < 0.05)
+tmap_mode("plot")
+tm_shape(HCSA) +
+  tm_polygons() +
+  tm_borders(alpha = 0.5) +
+tm_shape(HCSA_sig) +
+  tm_fill("gi_star") + 
+  tm_borders(alpha = 0.4)
+```

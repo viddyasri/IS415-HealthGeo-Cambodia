@@ -86,14 +86,20 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../Project/Proposal.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Project Overview</span></a>
+  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project-proposal" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Project Proposal</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-prototype-of-features" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Prototype of Features</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-project-proposal">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-prototype-of-features">    
+        <li class="dropdown-header">Exploratory Data Analysis</li>
+        <li class="dropdown-header">Network Constrained Spatial Point Pattern Analysis</li>
         <li>
-    <a class="dropdown-item" href="../Project/Proposal.html" rel="" target="">
- <span class="dropdown-text">Project Proposal</span></a>
+    <a class="dropdown-item" href="../Prototype/SpatialAutocorrlation.html" rel="" target="">
+ <span class="dropdown-text">Spatial Autocorrelation</span></a>
   </li>  
     </ul>
   </li>
@@ -171,28 +177,27 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation"><strong>2. Motivation</strong></h3>
-<p>Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as Cambodia, where disparities in healthcare access persist, there is an urgent need to address these inequalities.</p>
-<p>Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.</p>
-<p>The importance of healthcare accessibility extends beyond crisis response to encompass long-term health planning and community resilience. It directly influences preventive measures, such as immunization campaigns and health education initiatives, by ensuring that these interventions reach the intended populations. Furthermore, accessibility plays a crucial role in reducing the burden on tertiary care facilities, promoting early detection, and fostering a healthcare system that is responsive to the needs of diverse communities.</p>
+<p>Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for understanding the distribution of healthcare infrastructure.</p>
+<p>Therefore, we aim to provide a user-friendly app for spatial point pattern analysis, designed to simplify complex analytical processes for users of all backgrounds. Our motivation is rooted in the belief that everyone should have easy access to powerful spatial analysis tools, without the need for extensive coding knowledge or technical expertise.</p>
+<p>With a straightforward interface and compatibility across various operating systems, our app aims to democratize spatial analysis, making it accessible and insightful for users regardless of their experience level.</p>
 </section>
 <section id="objectives" class="level3">
 <h3 class="anchored" data-anchor-id="objectives"><strong>3. Objectives</strong></h3>
 <ul>
-<li><p>Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across regions of different sizes in Cambodia - provinces, districts, communes, and villages.</p></li>
-<li><p>Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.</p></li>
-<li><p>Provide actionable insights for healthcare planning and resource allocation.</p></li>
+<li><p>Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities and other socio-economic factors across regions of different sizes in Cambodia - provinces, districts, communes, and villages.</p></li>
+<li><p>Apply spatial analysis methods to assess spatial distribution of points while considering network connectivity and evaluate spatial dependence or similarity between neighboring observations.</p></li>
 </ul>
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data"><strong>4. Data</strong></h3>
 <p>This project will utilize a number of data sets, which are:</p>
 <ul>
-<li>Healthcare facility locations
+<li>Healthcare facility locations, namely
 <ul>
-<li>healthcenter</li>
-<li>healthpost</li>
-<li>nationalhospital</li>
-<li>referralhospital</li>
+<li>Location of health centers</li>
+<li>Location of health posts</li>
+<li>Location of national hospitals</li>
+<li>Location of referral hospitals</li>
 </ul></li>
 <li>Population information</li>
 <li>Road network data</li>
@@ -208,11 +213,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="features" class="level3">
 <h3 class="anchored" data-anchor-id="features"><strong>5. Features</strong></h3>
 <p><strong>Exploratory Data Analysis and Geo-visualization:</strong></p>
-<p>This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities through interactive point maps and choropleth maps. This visual representation aids in identifying spatial patterns, potential gaps, and areas with concentrated healthcare resources.</p>
-<p><strong>Network Constrained Kernel Density Estimation:</strong></p>
-<p>This feature aims to offer insights into healthcare facility accessibility based on the road network, allowing users to identify areas where access is constrained or optimal. This analysis aids in pinpointing regions where improvements in transportation infrastructure can enhance healthcare accessibility, contributing to more efficient and equitable healthcare delivery.</p>
+<p>This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities and other indicators through interactive point maps and choropleth maps.</p>
+<p><strong>Network Constrained Spatial Point Pattern Analysis:</strong></p>
+<p>This feature aims to offer insights into healthcare facility distribution based on the road network, allowing users to analyze spatial point patterns while considering the constraints imposed by a network topology. In addition, users can conduct K and G function analysis which provides insights into the spatial dependence, highlighting areas of clustering, dispersion, or randomness.</p>
 <p><strong>Spatial Autocorrelation:</strong></p>
-<p>This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). This information guides targeted interventions, enabling policymakers to prioritize resource allocation and interventions in areas with the greatest need.</p>
+<p>This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation).</p>
 </section>
 <section id="literature-review" class="level3">
 <h3 class="anchored" data-anchor-id="literature-review"><strong>6. Literature Review</strong></h3>

@@ -18,29 +18,27 @@ In Cambodia, the healthcare landscape exhibits significant variations across reg
 
 ### **2. Motivation**
 
-Health is not merely an individual concern but a collective responsibility that resonates with the broader fabric of society. In a nation as diverse as Cambodia, where disparities in healthcare access persist, there is an urgent need to address these inequalities.
+Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for understanding the distribution of healthcare infrastructure. 
 
-Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for identifying regions with insufficient healthcare infrastructure. This analysis not only pinpoints areas in need of urgent attention but also allows for the strategic planning and implementation of targeted interventions. By understanding the geographic distribution of healthcare facilities, policymakers and public health officials can make informed decisions to bridge gaps, allocate resources efficiently, and improve overall healthcare delivery.
+Therefore, we aim to provide a user-friendly app for spatial point pattern analysis, designed to simplify complex analytical processes for users of all backgrounds. Our motivation is rooted in the belief that everyone should have easy access to powerful spatial analysis tools, without the need for extensive coding knowledge or technical expertise. 
 
-The importance of healthcare accessibility extends beyond crisis response to encompass long-term health planning and community resilience. It directly influences preventive measures, such as immunization campaigns and health education initiatives, by ensuring that these interventions reach the intended populations. Furthermore, accessibility plays a crucial role in reducing the burden on tertiary care facilities, promoting early detection, and fostering a healthcare system that is responsive to the needs of diverse communities.
+With a straightforward interface and compatibility across various operating systems, our app aims to democratize spatial analysis, making it accessible and insightful for users regardless of their experience level. 
 
 ### **3. Objectives**
 
--   Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities across regions of different sizes in Cambodia - provinces, districts, communes, and villages.
+-   Employ geospatial mapping techniques to visually represent the distribution of healthcare facilities and other socio-economic factors across regions of different sizes in Cambodia - provinces, districts, communes, and villages.
 
--   Apply advanced spatial analysis methods to identify high-demand areas and disparities in healthcare accessibility within each region.
-
--   Provide actionable insights for healthcare planning and resource allocation.
+-   Apply spatial analysis methods to assess spatial distribution of points while considering network connectivity and evaluate spatial dependence or similarity between neighboring observations.
 
 ### **4. Data**
 
 This project will utilize a number of data sets, which are:
 
--   Healthcare facility locations
-    -   healthcenter
-    -   healthpost
-    -   nationalhospital
-    -   referralhospital
+-   Healthcare facility locations, namely
+    -   Location of health centers
+    -   Location of health posts
+    -   Location of national hospitals
+    -   Location of referral hospitals
 -   Population information
 -   Road network data
 -   Cambodia boundary layer
@@ -53,15 +51,15 @@ This project will utilize a number of data sets, which are:
 
 **Exploratory Data Analysis and Geo-visualization:**
 
-This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities through interactive point maps and choropleth maps. This visual representation aids in identifying spatial patterns, potential gaps, and areas with concentrated healthcare resources.
+This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities and other indicators through interactive point maps and choropleth maps. 
 
-**Network Constrained Kernel Density Estimation:**
+**Network Constrained Spatial Point Pattern Analysis:**
 
-This feature aims to offer insights into healthcare facility accessibility based on the road network, allowing users to identify areas where access is constrained or optimal. This analysis aids in pinpointing regions where improvements in transportation infrastructure can enhance healthcare accessibility, contributing to more efficient and equitable healthcare delivery.
+This feature aims to offer insights into healthcare facility distribution based on the road network, allowing users to analyze spatial point patterns while considering the constraints imposed by a network topology. In addition, users can conduct K and G function analysis which provides insights into the spatial dependence, highlighting areas of clustering, dispersion, or randomness.
 
 **Spatial Autocorrelation:**
 
-This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). This information guides targeted interventions, enabling policymakers to prioritize resource allocation and interventions in areas with the greatest need.
+This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). 
 
 ### **6. Literature Review**
 

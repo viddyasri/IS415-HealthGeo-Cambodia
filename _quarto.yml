@@ -7,10 +7,16 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - text: "Project Proposal"
+      - text: "Project Overview"
+        href: "Project/Proposal.html"
+      - text: "Prototype of Features"
         menu:
-          - text: "Project Proposal"
-            href: "Project/Proposal.html"
+          - text: "Exploratory Data Analysis"
+            href: ""
+          - text: "Network Constrained Spatial Point Pattern Analysis"
+            href: ""
+          - text: "Spatial Autocorrelation"
+            href: "Prototype/SpatialAutocorrlation.html"
     right:
       - icon: github
         href: https://github.com

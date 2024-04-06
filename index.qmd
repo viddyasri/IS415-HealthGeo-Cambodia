@@ -11,16 +11,14 @@ highlight-style: dracula
 Group Members: Akshaya Natarajan, Viddyasri Subramaniam
 
 \
-In this project, we aim to gain a deeper understanding of healthcare facility distribution in Cambodia. Given Cambodia's unique geographical and demographic characteristics, examining the placement of healthcare facilities in relation to population distribution can offer valuable insights into the accessibility of healthcare across various regions, including cities, towns, and rural areas. By studying the distribution of healthcare facilities, we seek to identify areas with limited access to healthcare services and understand the factors contributing to such disparities.
+In this project, we aim to gain a deeper understanding of healthcare facility distribution in Cambodia. Given Cambodia's unique geographical and demographic characteristics, examining the placement of healthcare facilities in relation to population distribution can offer valuable insights into the accessibility of healthcare across various regions, including districts, communes, and village areas. 
 
-We have chosen Cambodia due to its proximity to Singapore and its uniform Coordinate Reference System (CRS), which allows for accurate projection of our data. Cambodia, being a small country, provides a manageable dataset for analysis. Furthermore, analyzing healthcare facility distribution in Cambodia can provide insights into broader human development indicators, such as education levels, nutrition, and mortality rates, within different Cambodian localities(provinces, districts, villages).
+This project aims to democratize spatial analysis, making it accessible and insightful for users regardless of their experience level. This in turn allows all users to explore the spatial distribution of healthcare facilities and its correlation with other socio-economic factors.
 
-By understanding the spatial distribution of healthcare resources and its correlation with socio-economic factors, we aim to inform policy-making and resource allocation decisions to improve healthcare accessibility and outcomes across Cambodia.
+Our application for spatial point pattern analysis comprises a three pronged approach:
 
-We aim to execute our analysis via a three pronged approach:
+-   Exploratory Data Analysis of Geospatial and Population data
 
--   Exploratory Data Analysis of the aspatial and geospatial data
+-   Network Constrained Spatial Point Pattern Analysis
 
--   Network Constrained Kernel Density Estimation of healthcare facilities
-
--   Spatial Autocorrelation of healthcare facilities
+-   Spatial Autocorrelation of Healthcare Facilities
