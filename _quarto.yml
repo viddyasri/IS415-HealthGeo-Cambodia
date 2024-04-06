@@ -18,7 +18,7 @@ website:
           - text: "Network Constrained Spatial Point Pattern Analysis"
             href: "Prototype/Take-home_Ex03/Take-home_Ex03.html"
           - text: "Spatial Autocorrelation"
-            href: "Prototype/Spatial Autocorrelation/SpatialAutocorrelation.html"
+            href: "Prototype/Spatial_Autocorrelation/SpatialAutocorrelation.html"
     right:
       - icon: github
         href: https://github.com
