@@ -16,7 +16,7 @@ website:
           - text: "Exploratory Data Analysis"
             href: ""
           - text: "Network Constrained Spatial Point Pattern Analysis"
-            href: ""
+            href: "Prototype/Take-home_Ex03.html"
           - text: "Spatial Autocorrelation"
             href: "Prototype/SpatialAutocorrlation.html"
     right:
