@@ -1,8 +1,11 @@
 ---
-title: "Take-home Exercsie 3 - Prototyping"
+title: "Network Spatial Point Pattern Analysis"
 execute: 
   warning: false
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    freeze: TRUE
+date: 6 April 2024
 highlight-style: dracula
 ---
 
@@ -17,7 +20,7 @@ pacman::p_load(sf, tidyverse, tmap, raster, spatstat, maptools, spNetwork, class
 [**Boundary Layer (Province-Level):**]{.underline}
 
 ```{r}
-province_sf <- st_read(dsn = "../../data/cambodia/boundary/level1", 
+province_sf <- st_read(dsn = "data/cambodia/boundary/level1", 
                 layer = "KHM_adm1")
 ```
 
@@ -34,7 +37,7 @@ tm_shape(province_sf) +
 [**Road Layer:**]{.underline}
 
 ```{r}
-cam_road_sf <- st_read("../../data/cambodia/roads/osm_road_2022_1641440547.gpkg")
+cam_road_sf <- st_read("data/cambodia/roads/osm_road_2022_1641440547.gpkg")
 ```
 
 ```{r}
@@ -56,7 +59,7 @@ tm_shape(cam_road_sf) +
 Health Centers:
 
 ```{r}
-points_healthcenter <- st_read(dsn = "../../data/cambodia/healthcenter", 
+points_healthcenter <- st_read(dsn = "data/cambodia/healthcenter", 
                 layer = "healthcenter")
 ```
 
@@ -67,7 +70,7 @@ head(points_healthcenter)
 Health Posts:
 
 ```{r}
-points_healthpost <- st_read(dsn = "../../data/cambodia/healthpost", 
+points_healthpost <- st_read(dsn = "data/cambodia/healthpost", 
                 layer = "healthpost")
 ```
 
@@ -78,7 +81,7 @@ head(points_healthpost)
 Referral Hospitals:
 
 ```{r}
-points_referralhospital <- st_read(dsn = "../../data/cambodia/referralhospital", 
+points_referralhospital <- st_read(dsn = "data/cambodia/referralhospital", 
                 layer = "hltfacp_referral")
 ```
 
@@ -89,7 +92,7 @@ head(points_referralhospital)
 National Hospitals:
 
 ```{r}
-points_nationalhospital <- st_read(dsn = "../../data/cambodia/nationalhospital", 
+points_nationalhospital <- st_read(dsn = "data/cambodia/nationalhospital", 
                 layer = "national_hospital_en")
 ```
 
@@ -191,7 +194,7 @@ st_geometry(points_facilities)
 ```
 
 ```{r}
-write_rds(points_facilities, "../../data/rds/points_facilities.rds")
+write_rds(points_facilities, "data/rds/points_facilities.rds")
 ```
 
 [**Handle Invalid Geometries:**]{.underline}
@@ -231,7 +234,7 @@ st_geometry(province_sf)
 ```
 
 ```{r}
-write_rds(province_sf, "../../data/rds/province_sf.rds")
+write_rds(province_sf, "data/rds/province_sf.rds")
 ```
 
 ## Road Layer
@@ -246,7 +249,7 @@ st_geometry(cam_road_sf)
 ```
 
 ```{r}
-write_rds(cam_road_sf, "../../data/rds/cam_road_sf.rds")
+write_rds(cam_road_sf, "data/rds/cam_road_sf.rds")
 ```
 :::
 
@@ -257,9 +260,9 @@ For the Shiny application, all kernel types will be included and the user will b
 [**Preparing the Road Layer and Facility Point Data:**]{.underline}
 
 ```{r}
-province_sf <- read_rds("../../data/rds/province_sf.rds")
-points_facilities <- read_rds("../../data/rds/points_facilities.rds")
-cam_road_sf <- read_rds("../../data/rds/cam_road_sf.rds")
+province_sf <- readr::read_rds("data/rds/province_sf.rds")
+points_facilities <- readr::read_rds("data/rds/points_facilities.rds")
+cam_road_sf <- readr::read_rds("data/rds/cam_road_sf.rds")
 ```
 
 ```{r}
