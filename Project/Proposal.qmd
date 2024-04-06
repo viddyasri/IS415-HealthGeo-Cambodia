@@ -1,5 +1,5 @@
 ---
-title: "Project Proposal"
+title: "Project Overview"
 execute: 
   warning: false
 date: 3 March 2024
@@ -18,11 +18,11 @@ In Cambodia, the healthcare landscape exhibits significant variations across reg
 
 ### **2. Motivation**
 
-Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for understanding the distribution of healthcare infrastructure. 
+Recognizing the pivotal role of accessible healthcare, conducting a spatial point pattern analysis becomes an invaluable tool for understanding the distribution of healthcare infrastructure.
 
-Therefore, we aim to provide a user-friendly app for spatial point pattern analysis, designed to simplify complex analytical processes for users of all backgrounds. Our motivation is rooted in the belief that everyone should have easy access to powerful spatial analysis tools, without the need for extensive coding knowledge or technical expertise. 
+Therefore, we aim to provide a user-friendly app for spatial point pattern analysis, designed to simplify complex analytical processes for users of all backgrounds. Our motivation is rooted in the belief that everyone should have easy access to powerful spatial analysis tools, without the need for extensive coding knowledge or technical expertise.
 
-With a straightforward interface and compatibility across various operating systems, our app aims to democratize spatial analysis, making it accessible and insightful for users regardless of their experience level. 
+With a straightforward interface and compatibility across various operating systems, our app aims to democratize spatial analysis, making it accessible and insightful for users regardless of their experience level.
 
 ### **3. Objectives**
 
@@ -51,7 +51,7 @@ This project will utilize a number of data sets, which are:
 
 **Exploratory Data Analysis and Geo-visualization:**
 
-This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities and other indicators through interactive point maps and choropleth maps. 
+This feature aims to provide users with an intuitive understanding of the current distribution of healthcare facilities and other indicators through interactive point maps and choropleth maps.
 
 **Network Constrained Spatial Point Pattern Analysis:**
 
@@ -59,7 +59,7 @@ This feature aims to offer insights into healthcare facility distribution based 
 
 **Spatial Autocorrelation:**
 
-This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation). 
+This feature aims to unveil spatial patterns of healthcare accessibility disparities by identifying regions with significant positive or negative autocorrelation. Users gain insights into clusters of high accessibility (positive autocorrelation) or low accessibility (negative autocorrelation).
 
 ### **6. Literature Review**
 
