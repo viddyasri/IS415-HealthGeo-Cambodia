@@ -1,0 +1,9 @@
+---
+title: "Poster"
+execute: 
+  warning: false
+date: 6 April 2024
+highlight-style: dracula
+---
+
+![](/Images/HealthGeo_Poster.jpg)

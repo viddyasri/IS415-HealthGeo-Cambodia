@@ -9,6 +9,8 @@ website:
         text: Home
       - text: "Project Overview"
         href: "Project/Proposal.html"
+      - text: "Project Poster"
+        href: "Project/Poster.html"
       - text: "Prototype of Features"
         menu:
           - text: "Exploratory Data Analysis"
