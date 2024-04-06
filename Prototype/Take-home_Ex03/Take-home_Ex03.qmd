@@ -1,0 +1,582 @@
+---
+title: "Take-home Exercsie 3 - Prototyping"
+execute: 
+  warning: false
+date: "`r Sys.Date()`"
+highlight-style: dracula
+---
+
+## Installing and Loading R Packages
+
+```{r}
+pacman::p_load(sf, tidyverse, tmap, raster, spatstat, maptools, spNetwork, classInt, viridis, arrow, lubridate, dplyr, sfdep)
+```
+
+## Importing Geospatial Data
+
+[**Boundary Layer (Province-Level):**]{.underline}
+
+```{r}
+province_sf <- st_read(dsn = "../../data/cambodia/boundary/level1", 
+                layer = "KHM_adm1")
+```
+
+```{r}
+st_geometry(province_sf)
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(province_sf) +
+  tm_polygons()
+```
+
+[**Road Layer:**]{.underline}
+
+```{r}
+cam_road_sf <- st_read("../../data/cambodia/roads/osm_road_2022_1641440547.gpkg")
+```
+
+```{r}
+unique(cam_road_sf$fclass)
+```
+
+```{r}
+st_geometry(cam_road_sf)
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(cam_road_sf) +
+  tm_lines()
+```
+
+[**Healthcare Facilities**]{.underline}
+
+Health Centers:
+
+```{r}
+points_healthcenter <- st_read(dsn = "../../data/cambodia/healthcenter", 
+                layer = "healthcenter")
+```
+
+```{r}
+head(points_healthcenter)
+```
+
+Health Posts:
+
+```{r}
+points_healthpost <- st_read(dsn = "../../data/cambodia/healthpost", 
+                layer = "healthpost")
+```
+
+```{r}
+head(points_healthpost)
+```
+
+Referral Hospitals:
+
+```{r}
+points_referralhospital <- st_read(dsn = "../../data/cambodia/referralhospital", 
+                layer = "hltfacp_referral")
+```
+
+```{r}
+head(points_referralhospital)
+```
+
+National Hospitals:
+
+```{r}
+points_nationalhospital <- st_read(dsn = "../../data/cambodia/nationalhospital", 
+                layer = "national_hospital_en")
+```
+
+```{r}
+head(points_nationalhospital)
+```
+
+## Data Preparation
+
+[**Preparing Province Data:**]{.underline}
+
+For province data, since the province names have unique characters, we first modify them by converting characters in the NAME_1 column to ASCII equivalents using the stringi::stri_trans_general() function and putting the new, standardized names into a column called PROVINCE.
+
+```{r}
+province_sf <- province_sf %>%
+  mutate(PROVINCE = stringi::stri_trans_general(NAME_1, "Latin-ASCII"))
+```
+
+[**Preparing Health Facilities Data:**]{.underline}
+
+As the facilities are initially not categorised, we make a new category column and label them accordingly.
+
+```{r}
+points_healthcenter <- points_healthcenter %>% mutate(CATEGORY = "Health Center")
+points_healthpost <- points_healthpost %>% mutate(CATEGORY = "Health Post")
+points_referralhospital <- points_referralhospital %>% mutate(CATEGORY = "Referral Hospital")
+points_nationalhospital <- points_nationalhospital %>% mutate(CATEGORY = "National Hospital")
+```
+
+Next, we remove any unwanted columns.
+
+```{r}
+points_healthcenter <- subset(points_healthcenter, select = -COVERNAME)
+```
+
+Since the columns in the national hospital dataset differ from the others, we're starting the standardization process here. First, we'll convert all columns to uppercase. Then, we'll remove unmatched columns, add missing ones, and rearrange them. Finally, we'll merge all the data points.
+
+```{r}
+st_geometry(points_nationalhospital) <- "geometry"
+
+# Get the names of all columns except the geometry column
+column_names <- names(points_nationalhospital)[!grepl("^geometry$", names(points_nationalhospital))]
+
+# Convert column names to uppercase
+column_names_upper <- toupper(column_names)
+
+# Replace column names in the sf object
+names(points_nationalhospital)[!grepl("^geometry$", names(points_nationalhospital))] <- column_names_upper
+```
+
+```{r}
+# Drop columns "BUILDING", "STREET", "WEB", "REFERENCE", "LAT", "LONG", and "LANGUAGE"
+points_nationalhospital <- subset(points_nationalhospital, select = -c(BUILDING, STREET, WEB, REFERENCE, LAT, LONG, LANGUAGE))
+
+points_nationalhospital$DCODE <- NA
+points_nationalhospital$CCODE <- NA
+points_nationalhospital$VCODE <- NA
+points_nationalhospital$ODCODE <- NA
+points_nationalhospital$ODNAME <- NA
+
+# Rearrange the columns
+points_nationalhospital <- points_nationalhospital[, c("PCODE", "PNAME", "DCODE", "DNAME", "CCODE", "CNAME", "VCODE", "VNAME", "ODCODE", "ODNAME", "FACILITCOD", "FACILITNAM", "CATEGORY", "geometry")]
+
+# Print the modified sf object
+print(points_nationalhospital)
+```
+
+```{r}
+points_facilities <- rbind(points_healthcenter, points_healthpost, points_referralhospital, points_nationalhospital)
+```
+
+```{r}
+points_facilities$PNAME <- gsub("Banteay Mean Chey", "Banteay Meanchey", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Battambang", "Batdambang", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Battam Bang", "Batdambang", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Kampong Speu", "Kampong Spoe", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Kampong Spueu", "Kampong Spoe", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Kampong Thom", "Kampong Thum", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Koh Kong", "Kaoh Kong", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Kratie", "Kracheh", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Pailin", "Krong Pailin", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Sihanoukville", "Krong Preah Sihanouk", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Sihaknouk Vill", "Krong Preah Sihanouk", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Mondul Kiri", "Mondol Kiri", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Oddor Meanchey", "Otdar Mean Chey", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Oddar Mean chey", "Otdar Mean Chey", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Oddar Meanchey", "Otdar Mean Chey", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Pursat", "Pouthisat", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Ratanak Kiri", "Rotanokiri", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Siemreap", "Siemreab", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Siem Reap", "Siemreab", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Stung  Treng", "Stoeng Treng", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Stung Treng", "Stoeng Treng", points_facilities$PNAME)
+points_facilities$PNAME <- gsub("Takeo", "Takev", points_facilities$PNAME)
+```
+
+```{r}
+st_geometry(points_facilities)
+```
+
+```{r}
+write_rds(points_facilities, "../../data/rds/points_facilities.rds")
+```
+
+[**Handle Invalid Geometries:**]{.underline}
+
+::: panel-tabset
+## Boundary Layer
+
+```{r}
+length(which(st_is_valid(province_sf) == FALSE))
+```
+
+## Road Layer
+
+```{r}
+length(which(st_is_valid(cam_road_sf) == FALSE))
+```
+
+## Health Facilities
+
+```{r}
+length(which(st_is_valid(points_facilities) == FALSE))
+```
+:::
+
+[**Projection System Transformation:**]{.underline}
+
+::: panel-tabset
+## Boundary Layer
+
+```{r}
+province_sf <- st_transform(province_sf, 32648)
+st_crs(province_sf)
+```
+
+```{r}
+st_geometry(province_sf)
+```
+
+```{r}
+write_rds(province_sf, "../../data/rds/province_sf.rds")
+```
+
+## Road Layer
+
+```{r}
+cam_road_sf <- st_transform(cam_road_sf, 32648)
+st_crs(cam_road_sf)
+```
+
+```{r}
+st_geometry(cam_road_sf)
+```
+
+```{r}
+write_rds(cam_road_sf, "../../data/rds/cam_road_sf.rds")
+```
+:::
+
+## Network Constrained Kernel Density Estimation
+
+For the Shiny application, all kernel types will be included and the user will be able to experiment with different fixed bandwidths. NetKDE can also be performed on the 25 provinces of Cambodia and can be narrowed down to facility type. However, for the sake of execution time, this exercise will demonstrate only 3 combinations of kernels and bandwidths for the simple method specifically for the province of Kampot.
+
+[**Preparing the Road Layer and Facility Point Data:**]{.underline}
+
+```{r}
+province_sf <- read_rds("../../data/rds/province_sf.rds")
+points_facilities <- read_rds("../../data/rds/points_facilities.rds")
+cam_road_sf <- read_rds("../../data/rds/cam_road_sf.rds")
+```
+
+```{r}
+province = province_sf %>% filter(PROVINCE=="Kampot")
+province_road_sf = st_intersection(cam_road_sf, st_union(province))
+```
+
+```{r}
+province_facilities = st_intersection(points_facilities, st_union(province))
+```
+
+[**Converting to Simple Geometries:**]{.underline}
+
+```{r}
+province_road_sf <- st_cast(province_road_sf, "LINESTRING")
+```
+
+[**Basic Plot:**]{.underline}
+
+```{r}
+tmap_mode("plot")
+tm_shape(province_road_sf) + 
+  tm_lines(col = "#2b2b2b") + 
+  tm_shape(province_facilities) + 
+  tm_dots(col = "#29ab87", size = 0.2)
+```
+
+### Performing NetKDE
+
+[**Prepare Lixel Objects and Line Centre Points:**]{.underline}
+
+```{r}
+lixels <- lixelize_lines(province_road_sf, 
+                         750, 
+                         mindist = 375)
+
+samples <- lines_center(lixels)
+```
+
+#### Quartic Kernel
+
+[**Bandwidth - 200:**]{.underline}
+
+```{r}
+densities_q200 <- nkde(
+    province_road_sf,
+    events = province_facilities,
+    w = rep(1, nrow(province_facilities)),
+    samples = samples,
+    kernel_name = "quartic",
+    bw = 200,
+    div = "bw",
+    method = "simple",
+    digits = 1,
+    tol = 1,
+    grid_shape = c(1, 1),
+    max_depth = 8,
+    agg = 5,
+    sparse = TRUE,
+    verbose = FALSE
+  )
+```
+
+```{r}
+samples$density_q200 <- densities_q200*nrow(province_facilities)*1000
+lixels$density_q200 <- densities_q200*nrow(province_facilities)*1000
+```
+
+***Visualization:***
+
+```{r}
+samples2 <- samples[order(samples$density_q200),]
+
+tmap_mode("plot")
+tm_shape(province_road_sf) + 
+  tm_lines("black") + 
+  tm_shape(samples2) + 
+  tm_dots("density_q200", style = "kmeans", palette = "GnBu", n = 7, size = 0.07) + 
+  tm_layout(legend.outside = FALSE)
+```
+
+```{r}
+province_facilities <- province_facilities %>%
+    mutate(COMBINED_ID = paste("Name:", FACILITNAM, "|| Category:", CATEGORY))
+  
+tmap_mode('view')
+tm_basemap(server = "Esri.WorldTopoMap") +
+tm_basemap(server = "Esri.WorldGrayCanvas")+
+tm_basemap(server = "OpenStreetMap") +
+tm_shape(lixels) +
+  tm_lines(col="density_q200", palette="PuRd", lwd=5) +
+tm_shape(province_facilities) +
+  tm_dots(id = "COMBINED_ID")+
+tm_shape(province) + 
+  tm_borders()
+```
+
+```{r}
+tmap_mode("plot")
+```
+
+#### Epanechnikov Kernel
+
+[**Bandwidth - 300:**]{.underline}
+
+```{r}
+densities_e300 <- nkde(
+    province_road_sf,
+    events = province_facilities,
+    w = rep(1, nrow(province_facilities)),
+    samples = samples,
+    kernel_name = "epanechnikov",
+    bw = 250,
+    div = "bw",
+    method = "simple",
+    digits = 1,
+    tol = 1,
+    grid_shape = c(1, 1),
+    max_depth = 8,
+    agg = 5,
+    sparse = TRUE,
+    verbose = FALSE
+  )
+```
+
+```{r}
+samples$density_e300 <- densities_e300*nrow(province_facilities)*1000
+lixels$density_e300 <- densities_e300*nrow(province_facilities)*1000
+```
+
+***Visualization:***
+
+```{r}
+samples2 <- samples[order(samples$density_e300),]
+
+tmap_mode("plot")
+tm_shape(province_road_sf) + 
+  tm_lines("black") + 
+  tm_shape(samples2) + 
+  tm_dots("density_e300", style = "kmeans", palette = "GnBu", n = 7, size = 0.07) + 
+  tm_layout(legend.outside = FALSE)
+```
+
+```{r}
+province_facilities <- province_facilities %>%
+    mutate(COMBINED_ID = paste("Name:", FACILITNAM, "|| Category:", CATEGORY))
+  
+tmap_mode('view')
+tm_basemap(server = "Esri.WorldTopoMap") +
+tm_basemap(server = "Esri.WorldGrayCanvas")+
+tm_basemap(server = "OpenStreetMap") +
+tm_shape(lixels) +
+  tm_lines(col="density_e300", palette="PuRd", lwd=5) +
+tm_shape(province_facilities) +
+  tm_dots(id = "COMBINED_ID")+
+tm_shape(province) + 
+  tm_borders()
+```
+
+```{r}
+tmap_mode("plot")
+```
+
+#### Uniform Kernel
+
+[**Bandwidth - 500:**]{.underline}
+
+```{r}
+densities_u500 <- nkde(
+    province_road_sf,
+    events = province_facilities,
+    w = rep(1, nrow(province_facilities)),
+    samples = samples,
+    kernel_name = "uniform",
+    bw = 500,
+    div = "bw",
+    method = "simple",
+    digits = 1,
+    tol = 1,
+    grid_shape = c(1, 1),
+    max_depth = 8,
+    agg = 5,
+    sparse = TRUE,
+    verbose = FALSE
+  )
+```
+
+```{r}
+samples$density_u500 <- densities_u500*nrow(province_facilities)*1000
+lixels$density_u500 <- densities_u500*nrow(province_facilities)*1000
+```
+
+***Visualization:***
+
+```{r}
+samples2 <- samples[order(samples$density_u500),]
+
+tmap_mode("plot")
+tm_shape(province_road_sf) + 
+  tm_lines("black") + 
+  tm_shape(samples2) + 
+  tm_dots("density_u500", style = "kmeans", palette = "GnBu", n = 7, size = 0.07) + 
+  tm_layout(legend.outside = FALSE)
+```
+
+```{r}
+province_facilities <- province_facilities %>%
+    mutate(COMBINED_ID = paste("Name:", FACILITNAM, "|| Category:", CATEGORY))
+  
+tmap_mode('view')
+tm_basemap(server = "Esri.WorldTopoMap") +
+tm_basemap(server = "Esri.WorldGrayCanvas")+
+tm_basemap(server = "OpenStreetMap") +
+tm_shape(lixels) +
+  tm_lines(col="density_u500", palette="PuRd", lwd=5) +
+tm_shape(province_facilities) +
+  tm_dots(id = "COMBINED_ID")+
+tm_shape(province) + 
+  tm_borders()
+```
+
+```{r}
+tmap_mode("plot")
+```
+
+## Network Constrained K-Function Analysis
+
+::: panel-tabset
+## NSIM - 30
+
+```{r}
+kfun_healthcare <- kfunctions(province_road_sf, 
+                             province_facilities,
+                             start = 0, 
+                             end = 1000, 
+                             step = 50, 
+                             width = 50, 
+                             nsim = 30, 
+                             resolution = 50,
+                             verbose = FALSE, 
+                             conf_int = 0.05)
+```
+
+```{r}
+kfun_healthcare$plotk
+```
+
+## NSIM - 50
+
+```{r}
+kfun_healthcare <- kfunctions(province_road_sf, 
+                             province_facilities,
+                             start = 0, 
+                             end = 1000, 
+                             step = 50, 
+                             width = 50, 
+                             nsim = 50, 
+                             resolution = 50,
+                             verbose = FALSE, 
+                             conf_int = 0.05)
+```
+
+```{r}
+kfun_healthcare$plotk
+```
+
+## NSIM - 70
+
+```{r}
+kfun_healthcare <- kfunctions(province_road_sf, 
+                             province_facilities,
+                             start = 0, 
+                             end = 1000, 
+                             step = 50, 
+                             width = 50, 
+                             nsim = 70, 
+                             resolution = 50,
+                             verbose = FALSE, 
+                             conf_int = 0.05)
+```
+
+```{r}
+kfun_healthcare$plotk
+```
+
+## NSIM - 99
+
+```{r}
+kfun_healthcare <- kfunctions(province_road_sf, 
+                             province_facilities,
+                             start = 0, 
+                             end = 1000, 
+                             step = 50, 
+                             width = 50, 
+                             nsim = 99, 
+                             resolution = 50,
+                             verbose = FALSE, 
+                             conf_int = 0.05)
+```
+
+```{r}
+kfun_healthcare$plotk
+```
+:::
+
+## Storyboarding
+
+For the storyboarding, it is divided it into three main sections: basic plotting, network constrained kernel density estimation (netKDE), and k-function analysis.
+
+In this basic plot section, users have the option to choose a province for analysis. Additionally, they can narrow down their selection to specific types of facilities if desired. The outcome of this section is a straightforward map displaying the locations of facilities on the province network.
+
+![](1.PNG)
+
+The second section enables users to conduct netKDE analysis. Here, they can select a particular province, further refine their choice by specifying facility types, and choose the kernel method along with the desired bandwidth for netKDE analysis. The result of this section comprises a tmap displayed in view mode, superimposed on the Esri.WorldTopoMap, and two other maps.
+
+![](2.PNG)
+
+In the third section, users can customize parameters for the k-function analysis. They have the flexibility to adjust parameters such as the starting point, ending point, and the number of simulations (nsim). Upon completion, this section generates a plot illustrating the k-function analysis.
+
+![](3.PNG)

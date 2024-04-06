@@ -113,7 +113,7 @@ For the purpose of the app, users will have the option to choose between Moran's
 
 ## Local Spatial Autocorrelation
 
-Unlike global spatial autocorrelation, which assesses the overall tendency for similar values to cluster together or disperse apart across the entire study area, local spatial autocorrelation examines spatial patterns at a more localized level. Two commonly used measures for assessing local spatial autocorrelation include Local Moran's I and Getis-Ord Gi* statistics.
+Unlike global spatial autocorrelation, which assesses the overall tendency for similar values to cluster together or disperse apart across the entire study area, local spatial autocorrelation examines spatial patterns at a more localized level. Two commonly used measures for assessing local spatial autocorrelation include Local Moran's I and Getis-Ord Gi\* statistics.
 
 ### Local Moran's I
 
@@ -180,9 +180,9 @@ tm_shape(lisa) +
   tm_borders(alpha = 0.4)
 ```
 
-### Getis-Ord Gi* Statistics
+### Getis-Ord Gi\* Statistics
 
-Gi* statistics are distance-based spatial statistics. Hence, distance methods are required instead of contiguity methods to derive the spatial weight matrix.
+Gi\* statistics are distance-based spatial statistics. Hence, distance methods are required instead of contiguity methods to derive the spatial weight matrix.
 
 ```{r}
 wm_idw <- facilities_sum_by_province %>%
@@ -194,7 +194,7 @@ wm_idw <- facilities_sum_by_province %>%
 wm_idw
 ```
 
-Then, we compute Local Gi*:
+Then, we compute Local Gi\*:
 
 ```{r}
 HCSA <- wm_idw %>%
@@ -206,7 +206,7 @@ HCSA <- wm_idw %>%
 HCSA
 ```
 
-Visualising Local Gi*:
+Visualising Local Gi\*:
 
 ```{r}
 tmap_mode("plot")
@@ -230,7 +230,7 @@ tm_shape(HCSA) +
 ```
 
 ::: callout-note
-For the purpose of the app, users will have the option to pick the Gi* statistic that they want to plot, as well as the data classification style and the simulations to derive the distance spatial weight matrix.
+For the purpose of the app, users will have the option to pick the Gi\* statistic that they want to plot, as well as the data classification style and the simulations to derive the distance spatial weight matrix.
 :::
 
 ## HCSA Map
