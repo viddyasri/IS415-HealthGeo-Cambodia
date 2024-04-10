@@ -14,7 +14,7 @@ website:
       - text: "Prototype of Features"
         menu:
           - text: "Exploratory Data Analysis"
-            href: ""
+            href: "Prototype/Take-home_Ex03_EDA/Take-home_Ex03.html"
           - text: "Network Constrained Spatial Point Pattern Analysis"
             href: "Prototype/Take-home_Ex03/Take-home_Ex03.html"
           - text: "Spatial Autocorrelation"

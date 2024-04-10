@@ -133,7 +133,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Prototype of Features</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-prototype-of-features">    
-        <li class="dropdown-header">Exploratory Data Analysis</li>
+        <li>
+    <a class="dropdown-item" href="../../Prototype/Take-home_Ex03_EDA/Take-home_Ex03.html" rel="" target="">
+ <span class="dropdown-text">Exploratory Data Analysis</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../../Prototype/Take-home_Ex03/Take-home_Ex03.html" rel="" target="">
  <span class="dropdown-text">Network Constrained Spatial Point Pattern Analysis</span></a>
@@ -371,7 +374,7 @@ alternative hypothesis: greater</code></pre>
     Monte-Carlo simulation of Geary C
 
 data:  facilities_sum_by_province$FACILITIES_SUM 
-weights: rswm_q 
+weights: rswm_q  
 number of simulations + 1: 100 
 
 statistic = 0.80401, observed rank = 16, p-value = 0.16
@@ -666,29 +669,30 @@ First 10 features:
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>HCSA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Simple feature collection with 24 features and 24 fields
+<pre><code>Simple feature collection with 24 features and 26 fields
 Geometry type: MULTIPOLYGON
 Dimension:     XY
 Bounding box:  xmin: 211598 ymin: 1096586 xmax: 784872.1 ymax: 1625374
 Projected CRS: WGS 84 / UTM zone 48N
-# A tibble: 24 × 25
-   gi_star   e_gi   var_gi p_value  p_sim p_folded_sim skewness kurtosis nb   
-     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;nb&gt; 
- 1   0.867 0.0451 0.000137   0.739 0.460          0.46     0.23    0.595 &lt;int&gt;
- 2   0.489 0.0431 0.000132   0.396 0.692          0.64     0.32    1.40  &lt;int&gt;
- 3  -0.867 0.0424 0.000154  -0.811 0.417          0.4      0.2     0.934 &lt;int&gt;
- 4   2.52  0.0518 0.000101   1.70  0.0893         0.12     0.06    0.523 &lt;int&gt;
- 5   1.89  0.0423 0.000110   1.89  0.0590         0.1      0.05    0.252 &lt;int&gt;
- 6   0.526 0.0431 0.000117   0.336 0.737          0.7      0.35    0.500 &lt;int&gt;
- 7   0.706 0.0428 0.000115   0.474 0.636          0.66     0.33    0.559 &lt;int&gt;
- 8   2.68  0.0466 0.000103   2.08  0.0378         0.08     0.04    0.595 &lt;int&gt;
- 9  -0.908 0.0362 0.000126  -0.494 0.621          0.72     0.35    0.632 &lt;int&gt;
-10  -0.795 0.0235 0.000237   0.114 0.909          0.78     0.42    1.14  &lt;int&gt;
+# A tibble: 24 × 27
+   gi_star cluster   e_gi   var_gi std_dev p_value p_sim p_folded_sim skewness
+     &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1   0.867 High    0.0451 0.000137   0.739  0.460   0.46         0.23    0.595
+ 2   0.489 High    0.0431 0.000132   0.396  0.692   0.64         0.32    1.40 
+ 3  -0.867 High    0.0424 0.000154  -0.811  0.417   0.4          0.2     0.934
+ 4   2.52  High    0.0518 0.000101   1.70   0.0893  0.12         0.06    0.523
+ 5   1.89  Low     0.0423 0.000110   1.89   0.0590  0.1          0.05    0.252
+ 6   0.526 High    0.0431 0.000117   0.336  0.737   0.7          0.35    0.500
+ 7   0.706 High    0.0428 0.000115   0.474  0.636   0.66         0.33    0.559
+ 8   2.68  High    0.0466 0.000103   2.08   0.0378  0.08         0.04    0.595
+ 9  -0.908 Low     0.0362 0.000126  -0.494  0.621   0.72         0.35    0.632
+10  -0.795 Low     0.0235 0.000237   0.114  0.909   0.78         0.42    1.14 
 # ℹ 14 more rows
-# ℹ 16 more variables: wts &lt;list&gt;, ID_0 &lt;dbl&gt;, ISO &lt;chr&gt;, NAME_0 &lt;chr&gt;,
-#   ID_1 &lt;dbl&gt;, NAME_1 &lt;chr&gt;, HASC_1 &lt;chr&gt;, CCN_1 &lt;dbl&gt;, CCA_1 &lt;chr&gt;,
-#   TYPE_1 &lt;chr&gt;, ENGTYPE_1 &lt;chr&gt;, NL_NAME_1 &lt;chr&gt;, VARNAME_1 &lt;chr&gt;,
-#   PROVINCE &lt;chr&gt;, FACILITIES_SUM &lt;int&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</code></pre>
+# ℹ 18 more variables: kurtosis &lt;dbl&gt;, nb &lt;nb&gt;, wts &lt;list&gt;, ID_0 &lt;dbl&gt;,
+#   ISO &lt;chr&gt;, NAME_0 &lt;chr&gt;, ID_1 &lt;dbl&gt;, NAME_1 &lt;chr&gt;, HASC_1 &lt;chr&gt;,
+#   CCN_1 &lt;dbl&gt;, CCA_1 &lt;chr&gt;, TYPE_1 &lt;chr&gt;, ENGTYPE_1 &lt;chr&gt;, NL_NAME_1 &lt;chr&gt;,
+#   VARNAME_1 &lt;chr&gt;, PROVINCE &lt;chr&gt;, FACILITIES_SUM &lt;int&gt;,
+#   geometry &lt;MULTIPOLYGON [m]&gt;</code></pre>
 </div>
 </div>
 <p>Visualising Local Gi*:</p>
