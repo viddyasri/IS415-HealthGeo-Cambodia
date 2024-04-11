@@ -1,0 +1,174 @@
+---
+title: "User Guide of our Shiny Application"
+execute: 
+  warning: false
+date: "`r Sys.Date()`"
+highlight-style: dracula
+---
+
+In this document, we will be providing a guide on how to use our application HealthGeo Cambodia.
+
+We have the following pages on our application that we will be explaining one by one here:
+
+1.  Home Page
+2.  Exploratory Data Analysis - Health Facilities
+3.  Exploratory Data Analysis - Population
+4.  Network-Constrained Kernel Density Estimation
+5.  Spatial Autocorrelation
+6.  Data
+
+## 1. Home Page 
+
+![](images/clipboard-1919762945.png)
+
+This page is a static page that provides users an overview of the problem statement that is being analysed and the data that is being used in this application. This acts as a primer for users' understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.
+
+## 2. Exploratory Data Analysis - Health Facilities
+
+You can navigate to this page by clicking the " EDA - Health Facilities " tab. This page has a tabset with two tabs. The first tab is an introduction tab. This tab tells you about the features offered in this page.
+
+![](images/clipboard-171205354.png)
+
+The next tab called "Maps" has a tabset of its own, where you can view either the Spatial Points map or the Choropleth map. There is a sidebar with filters to better filter out what you'd like to see on the map.
+
+### 2.1 Spatial Points map
+
+This is how the page looks like when the user tries to view the Spatial Points map:
+
+![](images/clipboard-1797495358.png)
+
+By default, the Spatial Points map will show the distribution of all 4 health facilities type all over Cambodia as dots. To change what you'd like to see on the map, you would have to modify the inputs present in the sidebar.
+
+The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.
+
+### 2.2 Sidebar
+
+The sidebar has 4 dropdowns and 4 checkboxes.
+
+#### 2.2.1 Drop downs
+
+The drop downs are for the user to choose the region they are interested in investigating.
+
+The drop downs are hierarchical, like the data is.
+
+::: callout-note
+Note on the data:
+
+Provinces are the largest grouping of regions in Cambodia, and it consists of smaller regions called districts. Each district them consists of smaller regions called communes, which then consist of smaller regions called villages.
+:::
+
+[Using all drop downs one after another]{.underline}
+
+When you select a province, all the options for the child drop downs, which are districts, communes, and villages dropdowns, will be filtered to only include regions part of that province. Hence, when province kampot is chosen, only districts part of kamport will be shown as options for the district dropdown.
+
+![](images/clipboard-3859864751.png)
+
+The same filtering happens for village and commune drop downs when province is selected. Only villages and communes part of that province would be provided as options for the village and commune drop downs respectively. Keeping that same logic, any parent drop down that is selected will cause all child drop downs to include regions only part of that parent region as options.
+
+Hence, when a region is selected as a district, all options for the commune and village drop downs will include only regions part of that district.
+
+::: callout-note
+There might be many child regions with similar names that are from different parent regions. For instance, there might be two communes with the same name, but they might be from different district. Hence, it is **advised** for a user to choose a province, district, commune then village.
+:::
+
+[Using select drop downs]{.underline}
+
+The user can choose to just select one of the 4 drop downs. They can just select a province, commune, village or district . This would be **ideal if they already knew what region** they wanted to investigate.
+
+#### 2.2.2 Checkboxes
+
+There are 4 checkboxes representing the 4 types of health facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in investigating.
+
+The types of facilities selected are directly reflected in the legend of the map as shown below:
+
+![](images/clipboard-1154292213.png)
+
+### 2.1 Choropleth map
+
+This choropleth map visualises the difference in the number of health facilities between the regions that are investigated. The spatial points map, however, visualises the individual discrete points whilst the choropleth map visualises the number of facilities in totality.
+
+This is how the choropleth map can look like:
+
+![](images/clipboard-1725605054.png)
+
+The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.
+
+By default, the user views the entirety of cambodia.
+
+In addition to the options present in the sidebar, we also have a couple other options that users can leverage to customize the map they are viewing.
+
+They can choose the color palate that is the most aesthetically pleasing and utilitarian for them. They can choose the type of data categorisation they prefer, and the number of the data categories they would want from 2 to 10.
+
+[Data categorization options:]{.underline}
+
+1.  **Quantile**: Divides data into groups with equal numbers of points.
+
+2.  **Jenks (Natural Breaks)**: Groups data by minimizing variance within and maximizing variance between groups.
+
+3.  **Equal Interval**: Splits data into groups with equal value ranges.
+
+4.  **Pretty**: Automatically determines 'nice' breakpoints in data to create understandable groups.
+
+5.  **Standard Deviation**: Groups data based on how far away points are from the mean, using standard deviation units.
+
+6.  **K-means**: Separates data into a specified number of clusters based on similarity
+
+[Color Palette Options:]{.underline}
+
+1.  Red-Yellow-Blue
+
+    1.  ![](images/clipboard-3599841527.png)
+
+2.  Blue-Green
+
+    1.  ![](images/clipboard-899837061.png)
+
+3.  Red-Grey
+
+    1.  ![](images/clipboard-2042984305.png)
+
+4.  Purple-Orange
+
+    1.  ![](images/clipboard-89957031.png)
+
+5.  Spectral
+
+    ![](images/clipboard-982731566.png)
+
+## 3. Exploratory Data Analysis - Population
+
+In this section, we will be visualising the differences in population indicators between provinces in Cambodia.
+
+This page has a tabset with two tabs, the first is the introduction explaining what this EDA is about.
+
+### 3.1 Introduction
+
+![](images/clipboard-678945791.png)
+
+### 3.2 Choropleth map
+
+The second tab in this page is the choropleth map itself:
+
+![](images/clipboard-3900241017.png)
+
+The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.
+
+This choropleth map visualizes the differences in population indicators between provinces. These indicators include mortality rate of newborns, mortality rates of children under 5, and literacy rates.
+
+### 3.3 Sidebar
+
+In the sidebar, we have options that the user can select to customise their map.
+
+**Province** - the user can select the province he wants to investigate.
+
+**Indicator** - the user can select the indicator (mortality rate of newborns, mortality rates of children under 5, and literacy rates) that they are interested in.
+
+The utility of the inputs color palette, number of bins and classification style remains the same as the previous choropleth map.
+
+## 5. Data
+
+This page allows the user to better understand the data that was used for this application. There is a tabset with three tabs where each represents the three key sets of data that were used. Each tab allows you to view the data in the form of a table, like so:
+
+![](images/clipboard-667310276.png)
+
+You could sort each of the columns ascendingly and descendingly, and also search for particular entries.

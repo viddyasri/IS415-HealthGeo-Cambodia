@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-04-06">
 
-<title>IS415-HealthGeo-Cambodia - Poster</title>
+<title>IS415-HealthGeo-Cambodia - User Guide of our Shiny Application</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,11 +90,11 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Project Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../Project/Poster.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../Project/Poster.html" rel="" target="">
  <span class="menu-text">Project Poster</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Guide/User-Guide.html" rel="" target="">
+    <a class="nav-link active" href="../Guide/User-Guide.html" rel="" target="" aria-current="page">
  <span class="menu-text">User Guide</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -136,14 +135,33 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#home-page" id="toc-home-page" class="nav-link active" data-scroll-target="#home-page">1. Home Page</a></li>
+  <li><a href="#exploratory-data-analysis---health-facilities" id="toc-exploratory-data-analysis---health-facilities" class="nav-link" data-scroll-target="#exploratory-data-analysis---health-facilities">2. Exploratory Data Analysis - Health Facilities</a>
+  <ul class="collapse">
+  <li><a href="#spatial-points-map" id="toc-spatial-points-map" class="nav-link" data-scroll-target="#spatial-points-map">2.1 Spatial Points map</a></li>
+  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar">2.2 Sidebar</a></li>
+  <li><a href="#choropleth-map" id="toc-choropleth-map" class="nav-link" data-scroll-target="#choropleth-map">2.1 Choropleth map</a></li>
+  </ul></li>
+  <li><a href="#exploratory-data-analysis---population" id="toc-exploratory-data-analysis---population" class="nav-link" data-scroll-target="#exploratory-data-analysis---population">3. Exploratory Data Analysis - Population</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">3.1 Introduction</a></li>
+  <li><a href="#choropleth-map-1" id="toc-choropleth-map-1" class="nav-link" data-scroll-target="#choropleth-map-1">3.2 Choropleth map</a></li>
+  <li><a href="#sidebar-1" id="toc-sidebar-1" class="nav-link" data-scroll-target="#sidebar-1">3.3 Sidebar</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">5. Data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Poster</h1>
+<h1 class="title">User Guide of our Shiny Application</h1>
 </div>
 
 
@@ -154,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 6, 2024</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -164,9 +182,154 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><img src="..\Images/HealthGeo_Poster.jpg" class="img-fluid"></p>
+<p>In this document, we will be providing a guide on how to use our application HealthGeo Cambodia.</p>
+<p>We have the following pages on our application that we will be explaining one by one here:</p>
+<ol type="1">
+<li>Home Page</li>
+<li>Exploratory Data Analysis - Health Facilities</li>
+<li>Exploratory Data Analysis - Population</li>
+<li>Network-Constrained Kernel Density Estimation</li>
+<li>Spatial Autocorrelation</li>
+<li>Data</li>
+</ol>
+<section id="home-page" class="level2">
+<h2 class="anchored" data-anchor-id="home-page">1. Home Page</h2>
+<p><img src="images/clipboard-1919762945.png" class="img-fluid"></p>
+<p>This page is a static page that provides users an overview of the problem statement that is being analysed and the data that is being used in this application. This acts as a primer for users’ understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.</p>
+</section>
+<section id="exploratory-data-analysis---health-facilities" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis---health-facilities">2. Exploratory Data Analysis - Health Facilities</h2>
+<p>You can navigate to this page by clicking the ” EDA - Health Facilities ” tab. This page has a tabset with two tabs. The first tab is an introduction tab. This tab tells you about the features offered in this page.</p>
+<p><img src="images/clipboard-171205354.png" class="img-fluid"></p>
+<p>The next tab called “Maps” has a tabset of its own, where you can view either the Spatial Points map or the Choropleth map. There is a sidebar with filters to better filter out what you’d like to see on the map.</p>
+<section id="spatial-points-map" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-points-map">2.1 Spatial Points map</h3>
+<p>This is how the page looks like when the user tries to view the Spatial Points map:</p>
+<p><img src="images/clipboard-1797495358.png" class="img-fluid"></p>
+<p>By default, the Spatial Points map will show the distribution of all 4 health facilities type all over Cambodia as dots. To change what you’d like to see on the map, you would have to modify the inputs present in the sidebar.</p>
+<p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
+</section>
+<section id="sidebar" class="level3">
+<h3 class="anchored" data-anchor-id="sidebar">2.2 Sidebar</h3>
+<p>The sidebar has 4 dropdowns and 4 checkboxes.</p>
+<section id="drop-downs" class="level4">
+<h4 class="anchored" data-anchor-id="drop-downs">2.2.1 Drop downs</h4>
+<p>The drop downs are for the user to choose the region they are interested in investigating.</p>
+<p>The drop downs are hierarchical, like the data is.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note on the data:</p>
+<p>Provinces are the largest grouping of regions in Cambodia, and it consists of smaller regions called districts. Each district them consists of smaller regions called communes, which then consist of smaller regions called villages.</p>
+</div>
+</div>
+<p><u>Using all drop downs one after another</u></p>
+<p>When you select a province, all the options for the child drop downs, which are districts, communes, and villages dropdowns, will be filtered to only include regions part of that province. Hence, when province kampot is chosen, only districts part of kamport will be shown as options for the district dropdown.</p>
+<p><img src="images/clipboard-3859864751.png" class="img-fluid"></p>
+<p>The same filtering happens for village and commune drop downs when province is selected. Only villages and communes part of that province would be provided as options for the village and commune drop downs respectively. Keeping that same logic, any parent drop down that is selected will cause all child drop downs to include regions only part of that parent region as options.</p>
+<p>Hence, when a region is selected as a district, all options for the commune and village drop downs will include only regions part of that district.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There might be many child regions with similar names that are from different parent regions. For instance, there might be two communes with the same name, but they might be from different district. Hence, it is <strong>advised</strong> for a user to choose a province, district, commune then village.</p>
+</div>
+</div>
+<p><u>Using select drop downs</u></p>
+<p>The user can choose to just select one of the 4 drop downs. They can just select a province, commune, village or district . This would be <strong>ideal if they already knew what region</strong> they wanted to investigate.</p>
+</section>
+<section id="checkboxes" class="level4">
+<h4 class="anchored" data-anchor-id="checkboxes">2.2.2 Checkboxes</h4>
+<p>There are 4 checkboxes representing the 4 types of health facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in investigating.</p>
+<p>The types of facilities selected are directly reflected in the legend of the map as shown below:</p>
+<p><img src="images/clipboard-1154292213.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="choropleth-map" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-map">2.1 Choropleth map</h3>
+<p>This choropleth map visualises the difference in the number of health facilities between the regions that are investigated. The spatial points map, however, visualises the individual discrete points whilst the choropleth map visualises the number of facilities in totality.</p>
+<p>This is how the choropleth map can look like:</p>
+<p><img src="images/clipboard-1725605054.png" class="img-fluid"></p>
+<p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
+<p>By default, the user views the entirety of cambodia.</p>
+<p>In addition to the options present in the sidebar, we also have a couple other options that users can leverage to customize the map they are viewing.</p>
+<p>They can choose the color palate that is the most aesthetically pleasing and utilitarian for them. They can choose the type of data categorisation they prefer, and the number of the data categories they would want from 2 to 10.</p>
+<p><u>Data categorization options:</u></p>
+<ol type="1">
+<li><p><strong>Quantile</strong>: Divides data into groups with equal numbers of points.</p></li>
+<li><p><strong>Jenks (Natural Breaks)</strong>: Groups data by minimizing variance within and maximizing variance between groups.</p></li>
+<li><p><strong>Equal Interval</strong>: Splits data into groups with equal value ranges.</p></li>
+<li><p><strong>Pretty</strong>: Automatically determines ‘nice’ breakpoints in data to create understandable groups.</p></li>
+<li><p><strong>Standard Deviation</strong>: Groups data based on how far away points are from the mean, using standard deviation units.</p></li>
+<li><p><strong>K-means</strong>: Separates data into a specified number of clusters based on similarity</p></li>
+</ol>
+<p><u>Color Palette Options:</u></p>
+<ol type="1">
+<li><p>Red-Yellow-Blue</p>
+<ol type="1">
+<li><img src="images/clipboard-3599841527.png" class="img-fluid"></li>
+</ol></li>
+<li><p>Blue-Green</p>
+<ol type="1">
+<li><img src="images/clipboard-899837061.png" class="img-fluid"></li>
+</ol></li>
+<li><p>Red-Grey</p>
+<ol type="1">
+<li><img src="images/clipboard-2042984305.png" class="img-fluid"></li>
+</ol></li>
+<li><p>Purple-Orange</p>
+<ol type="1">
+<li><img src="images/clipboard-89957031.png" class="img-fluid"></li>
+</ol></li>
+<li><p>Spectral</p>
+<p><img src="images/clipboard-982731566.png" class="img-fluid"></p></li>
+</ol>
+</section>
+</section>
+<section id="exploratory-data-analysis---population" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis---population">3. Exploratory Data Analysis - Population</h2>
+<p>In this section, we will be visualising the differences in population indicators between provinces in Cambodia.</p>
+<p>This page has a tabset with two tabs, the first is the introduction explaining what this EDA is about.</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">3.1 Introduction</h3>
+<p><img src="images/clipboard-678945791.png" class="img-fluid"></p>
+</section>
+<section id="choropleth-map-1" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-map-1">3.2 Choropleth map</h3>
+<p>The second tab in this page is the choropleth map itself:</p>
+<p><img src="images/clipboard-3900241017.png" class="img-fluid"></p>
+<p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
+<p>This choropleth map visualizes the differences in population indicators between provinces. These indicators include mortality rate of newborns, mortality rates of children under 5, and literacy rates.</p>
+</section>
+<section id="sidebar-1" class="level3">
+<h3 class="anchored" data-anchor-id="sidebar-1">3.3 Sidebar</h3>
+<p>In the sidebar, we have options that the user can select to customise their map.</p>
+<p><strong>Province</strong> - the user can select the province he wants to investigate.</p>
+<p><strong>Indicator</strong> - the user can select the indicator (mortality rate of newborns, mortality rates of children under 5, and literacy rates) that they are interested in.</p>
+<p>The utility of the inputs color palette, number of bins and classification style remains the same as the previous choropleth map.</p>
+</section>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">5. Data</h2>
+<p>This page allows the user to better understand the data that was used for this application. There is a tabset with three tabs where each represents the three key sets of data that were used. Each tab allows you to view the data in the form of a table, like so:</p>
+<p><img src="images/clipboard-667310276.png" class="img-fluid"></p>
+<p>You could sort each of the columns ascendingly and descendingly, and also search for particular entries.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

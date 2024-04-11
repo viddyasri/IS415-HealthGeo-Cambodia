@@ -11,6 +11,8 @@ website:
         href: "Project/Proposal.html"
       - text: "Project Poster"
         href: "Project/Poster.html"
+      - text: "User Guide"
+        href: "Guide/User-Guide.html"
       - text: "Prototype of Features"
         menu:
           - text: "Exploratory Data Analysis"
