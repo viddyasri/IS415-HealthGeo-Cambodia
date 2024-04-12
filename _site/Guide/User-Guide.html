@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-04-12">
 
 <title>IS415-HealthGeo-Cambodia - User Guide of our Shiny Application</title>
 <style>
@@ -139,20 +140,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#home-page" id="toc-home-page" class="nav-link active" data-scroll-target="#home-page">1. Home Page</a></li>
-  <li><a href="#exploratory-data-analysis---health-facilities" id="toc-exploratory-data-analysis---health-facilities" class="nav-link" data-scroll-target="#exploratory-data-analysis---health-facilities">2. Exploratory Data Analysis - Health Facilities</a>
+  <li><a href="#navigation" id="toc-navigation" class="nav-link active" data-scroll-target="#navigation">1. Navigation</a></li>
+  <li><a href="#home-page" id="toc-home-page" class="nav-link" data-scroll-target="#home-page">2. Home Page</a></li>
+  <li><a href="#exploratory-data-analysis---health-facilities" id="toc-exploratory-data-analysis---health-facilities" class="nav-link" data-scroll-target="#exploratory-data-analysis---health-facilities">3. Exploratory Data Analysis - Health Facilities</a>
   <ul class="collapse">
-  <li><a href="#spatial-points-map" id="toc-spatial-points-map" class="nav-link" data-scroll-target="#spatial-points-map">2.1 Spatial Points map</a></li>
-  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar">2.2 Sidebar</a></li>
-  <li><a href="#choropleth-map" id="toc-choropleth-map" class="nav-link" data-scroll-target="#choropleth-map">2.1 Choropleth map</a></li>
+  <li><a href="#spatial-points-map" id="toc-spatial-points-map" class="nav-link" data-scroll-target="#spatial-points-map">3.1 Spatial Points map</a></li>
+  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar">3.2 Sidebar</a></li>
+  <li><a href="#choropleth-map" id="toc-choropleth-map" class="nav-link" data-scroll-target="#choropleth-map">3.3 Choropleth map</a></li>
   </ul></li>
-  <li><a href="#exploratory-data-analysis---population" id="toc-exploratory-data-analysis---population" class="nav-link" data-scroll-target="#exploratory-data-analysis---population">3. Exploratory Data Analysis - Population</a>
+  <li><a href="#exploratory-data-analysis---population" id="toc-exploratory-data-analysis---population" class="nav-link" data-scroll-target="#exploratory-data-analysis---population">4. Exploratory Data Analysis - Population</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">3.1 Introduction</a></li>
-  <li><a href="#choropleth-map-1" id="toc-choropleth-map-1" class="nav-link" data-scroll-target="#choropleth-map-1">3.2 Choropleth map</a></li>
-  <li><a href="#sidebar-1" id="toc-sidebar-1" class="nav-link" data-scroll-target="#sidebar-1">3.3 Sidebar</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">4.1 Introduction</a></li>
+  <li><a href="#choropleth-map-1" id="toc-choropleth-map-1" class="nav-link" data-scroll-target="#choropleth-map-1">4.2 Choropleth map</a></li>
+  <li><a href="#sidebar-1" id="toc-sidebar-1" class="nav-link" data-scroll-target="#sidebar-1">4.3 Sidebar</a></li>
   </ul></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">5. Data</a></li>
+  <li><a href="#network-constrained-spatial-point-pattern-analysis-nsppa" id="toc-network-constrained-spatial-point-pattern-analysis-nsppa" class="nav-link" data-scroll-target="#network-constrained-spatial-point-pattern-analysis-nsppa">5. Network Constrained Spatial Point Pattern Analysis (NSPPA)</a>
+  <ul class="collapse">
+  <li><a href="#basic-plot" id="toc-basic-plot" class="nav-link" data-scroll-target="#basic-plot">5.1 Basic Plot</a></li>
+  <li><a href="#network-constrained-kernel-density-estimation" id="toc-network-constrained-kernel-density-estimation" class="nav-link" data-scroll-target="#network-constrained-kernel-density-estimation">5.2 Network Constrained Kernel Density Estimation</a></li>
+  <li><a href="#kg-function-analysis" id="toc-kg-function-analysis" class="nav-link" data-scroll-target="#kg-function-analysis">5.3 K/G Function Analysis</a></li>
+  </ul></li>
+  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation">6. Spatial Autocorrelation</a>
+  <ul class="collapse">
+  <li><a href="#global-spatial-autocorrelation" id="toc-global-spatial-autocorrelation" class="nav-link" data-scroll-target="#global-spatial-autocorrelation">6.1 Global Spatial Autocorrelation</a></li>
+  <li><a href="#local-spatial-autocorrelation" id="toc-local-spatial-autocorrelation" class="nav-link" data-scroll-target="#local-spatial-autocorrelation">6.2 Local Spatial Autocorrelation</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">7. Data</a></li>
   </ul>
 </nav>
     </div>
@@ -172,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">April 12, 2024</p>
     </div>
   </div>
   
@@ -183,37 +196,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>In this document, we will be providing a guide on how to use our application HealthGeo Cambodia.</p>
-<p>We have the following pages on our application that we will be explaining one by one here:</p>
+<section id="navigation" class="level2">
+<h2 class="anchored" data-anchor-id="navigation">1. Navigation</h2>
+<p><img src="images/navigation.PNG" class="img-fluid"></p>
+<p>Upon accessing the application, users will encounter a navigation bar located at the top of the interface, providing easy access to various sections. There are a total of 6 tabs within the navigation bar, each serving a distinct purpose.</p>
+<p>We will be explaining these tabs in more detail in this guide:</p>
 <ol type="1">
 <li>Home Page</li>
 <li>Exploratory Data Analysis - Health Facilities</li>
 <li>Exploratory Data Analysis - Population</li>
-<li>Network-Constrained Kernel Density Estimation</li>
+<li>Network-Constrained Spatial Point Pattern Analysis</li>
 <li>Spatial Autocorrelation</li>
 <li>Data</li>
 </ol>
+</section>
 <section id="home-page" class="level2">
-<h2 class="anchored" data-anchor-id="home-page">1. Home Page</h2>
+<h2 class="anchored" data-anchor-id="home-page">2. Home Page</h2>
 <p><img src="images/clipboard-1919762945.png" class="img-fluid"></p>
-<p>This page is a static page that provides users an overview of the problem statement that is being analysed and the data that is being used in this application. This acts as a primer for users’ understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.</p>
+<p>This page is a static page that provides users an overview of the problem that is being analysed and the data that is being used in this application. This acts as a primer for users’ understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All interpretations of maps in subsequent sections have been provided in the application itself.</p>
+</div>
+</div>
 </section>
 <section id="exploratory-data-analysis---health-facilities" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-data-analysis---health-facilities">2. Exploratory Data Analysis - Health Facilities</h2>
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis---health-facilities">3. Exploratory Data Analysis - Health Facilities</h2>
 <p>You can navigate to this page by clicking the ” EDA - Health Facilities ” tab. This page has a tabset with two tabs. The first tab is an introduction tab. This tab tells you about the features offered in this page.</p>
 <p><img src="images/clipboard-171205354.png" class="img-fluid"></p>
 <p>The next tab called “Maps” has a tabset of its own, where you can view either the Spatial Points map or the Choropleth map. There is a sidebar with filters to better filter out what you’d like to see on the map.</p>
 <section id="spatial-points-map" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-points-map">2.1 Spatial Points map</h3>
+<h3 class="anchored" data-anchor-id="spatial-points-map">3.1 Spatial Points map</h3>
 <p>This is how the page looks like when the user tries to view the Spatial Points map:</p>
 <p><img src="images/clipboard-1797495358.png" class="img-fluid"></p>
 <p>By default, the Spatial Points map will show the distribution of all 4 health facilities type all over Cambodia as dots. To change what you’d like to see on the map, you would have to modify the inputs present in the sidebar.</p>
 <p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
 </section>
 <section id="sidebar" class="level3">
-<h3 class="anchored" data-anchor-id="sidebar">2.2 Sidebar</h3>
+<h3 class="anchored" data-anchor-id="sidebar">3.2 Sidebar</h3>
 <p>The sidebar has 4 dropdowns and 4 checkboxes.</p>
 <section id="drop-downs" class="level4">
-<h4 class="anchored" data-anchor-id="drop-downs">2.2.1 Drop downs</h4>
+<h4 class="anchored" data-anchor-id="drop-downs">3.2.1 Drop downs</h4>
 <p>The drop downs are for the user to choose the region they are interested in investigating.</p>
 <p>The drop downs are hierarchical, like the data is.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -231,7 +262,7 @@ Note
 </div>
 </div>
 <p><u>Using all drop downs one after another</u></p>
-<p>When you select a province, all the options for the child drop downs, which are districts, communes, and villages dropdowns, will be filtered to only include regions part of that province. Hence, when province kampot is chosen, only districts part of kamport will be shown as options for the district dropdown.</p>
+<p>When you select a province, all the options for the child drop downs, which are districts, communes, and villages drop downs, will be filtered to only include regions part of that province. Hence, when province Kampot is chosen, only districts part of Kampot will be shown as options for the district drop down.</p>
 <p><img src="images/clipboard-3859864751.png" class="img-fluid"></p>
 <p>The same filtering happens for village and commune drop downs when province is selected. Only villages and communes part of that province would be provided as options for the village and commune drop downs respectively. Keeping that same logic, any parent drop down that is selected will cause all child drop downs to include regions only part of that parent region as options.</p>
 <p>Hence, when a region is selected as a district, all options for the commune and village drop downs will include only regions part of that district.</p>
@@ -252,21 +283,21 @@ Note
 <p>The user can choose to just select one of the 4 drop downs. They can just select a province, commune, village or district . This would be <strong>ideal if they already knew what region</strong> they wanted to investigate.</p>
 </section>
 <section id="checkboxes" class="level4">
-<h4 class="anchored" data-anchor-id="checkboxes">2.2.2 Checkboxes</h4>
-<p>There are 4 checkboxes representing the 4 types of health facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in investigating.</p>
+<h4 class="anchored" data-anchor-id="checkboxes">3.2.2 Checkboxes</h4>
+<p>There are 4 checkboxes representing the 4 types of healthcare facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in examining.</p>
 <p>The types of facilities selected are directly reflected in the legend of the map as shown below:</p>
 <p><img src="images/clipboard-1154292213.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="choropleth-map" class="level3">
-<h3 class="anchored" data-anchor-id="choropleth-map">2.1 Choropleth map</h3>
-<p>This choropleth map visualises the difference in the number of health facilities between the regions that are investigated. The spatial points map, however, visualises the individual discrete points whilst the choropleth map visualises the number of facilities in totality.</p>
+<h3 class="anchored" data-anchor-id="choropleth-map">3.3 Choropleth map</h3>
+<p>This choropleth map visualises the difference in the number of healthcare facilities between the regions that are investigated. The spatial points map visualises the individual discrete points whilst the choropleth map visualises the number of facilities in its totality.</p>
 <p>This is how the choropleth map can look like:</p>
 <p><img src="images/clipboard-1725605054.png" class="img-fluid"></p>
 <p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
-<p>By default, the user views the entirety of cambodia.</p>
+<p>By default, the user views the entirety of Cambodia.</p>
 <p>In addition to the options present in the sidebar, we also have a couple other options that users can leverage to customize the map they are viewing.</p>
-<p>They can choose the color palate that is the most aesthetically pleasing and utilitarian for them. They can choose the type of data categorisation they prefer, and the number of the data categories they would want from 2 to 10.</p>
+<p>They can choose the color palette that is the most aesthetically pleasing and utilitarian for them. They can also choose the type of data classification they prefer, and the number of the data categories they would want from 2 to 10.</p>
 <p><u>Data categorization options:</u></p>
 <ol type="1">
 <li><p><strong>Quantile</strong>: Divides data into groups with equal numbers of points.</p></li>
@@ -300,33 +331,117 @@ Note
 </section>
 </section>
 <section id="exploratory-data-analysis---population" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-data-analysis---population">3. Exploratory Data Analysis - Population</h2>
-<p>In this section, we will be visualising the differences in population indicators between provinces in Cambodia.</p>
-<p>This page has a tabset with two tabs, the first is the introduction explaining what this EDA is about.</p>
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis---population">4. Exploratory Data Analysis - Population</h2>
+<p>In this section, users can visualise the differences in population indicators between provinces in Cambodia.</p>
+<p>This page has a tabset with two tabs, the first is the introduction explaining what this feature is about.</p>
 <section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction">3.1 Introduction</h3>
+<h3 class="anchored" data-anchor-id="introduction">4.1 Introduction</h3>
 <p><img src="images/clipboard-678945791.png" class="img-fluid"></p>
 </section>
 <section id="choropleth-map-1" class="level3">
-<h3 class="anchored" data-anchor-id="choropleth-map-1">3.2 Choropleth map</h3>
+<h3 class="anchored" data-anchor-id="choropleth-map-1">4.2 Choropleth map</h3>
 <p>The second tab in this page is the choropleth map itself:</p>
 <p><img src="images/clipboard-3900241017.png" class="img-fluid"></p>
 <p>The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.</p>
 <p>This choropleth map visualizes the differences in population indicators between provinces. These indicators include mortality rate of newborns, mortality rates of children under 5, and literacy rates.</p>
 </section>
 <section id="sidebar-1" class="level3">
-<h3 class="anchored" data-anchor-id="sidebar-1">3.3 Sidebar</h3>
+<h3 class="anchored" data-anchor-id="sidebar-1">4.3 Sidebar</h3>
 <p>In the sidebar, we have options that the user can select to customise their map.</p>
 <p><strong>Province</strong> - the user can select the province he wants to investigate.</p>
 <p><strong>Indicator</strong> - the user can select the indicator (mortality rate of newborns, mortality rates of children under 5, and literacy rates) that they are interested in.</p>
 <p>The utility of the inputs color palette, number of bins and classification style remains the same as the previous choropleth map.</p>
 </section>
 </section>
+<section id="network-constrained-spatial-point-pattern-analysis-nsppa" class="level2">
+<h2 class="anchored" data-anchor-id="network-constrained-spatial-point-pattern-analysis-nsppa">5. Network Constrained Spatial Point Pattern Analysis (NSPPA)</h2>
+<p>Users can navigate to this page by clicking the ” NSPPA ” tab. This page has a tabset with four tabs. The first tab is an introduction tab. This tab tells the user about the features offered in the following tabs.</p>
+<section id="basic-plot" class="level3">
+<h3 class="anchored" data-anchor-id="basic-plot">5.1 Basic Plot</h3>
+<p>The second tab in NSPPA presents users with a basic plot—an interactive point map illustrating the distribution of facility points across the road network. This visual representation offers users insights into the spatial arrangement of facilities within the specified area.</p>
+<p><img src="images/basic plot.PNG" class="img-fluid"></p>
+<p>By hovering over individual points, users can access detailed information such as the facility name and category. Additionally, users have the flexibility to focus their analysis on a specific province and category of facility</p>
+</section>
+<section id="network-constrained-kernel-density-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="network-constrained-kernel-density-estimation">5.2 Network Constrained Kernel Density Estimation</h3>
+<p>The third tab is the Network Constrained Kernel Density Estimation (KDE), a specialized spatial analysis technique tailored to estimate the density of point events along a network, such as a road network.</p>
+<p>Within this tab, users encounter two main types of Network KDE maps.</p>
+<p><strong><em>Simple Network KDE Map:</em></strong></p>
+<p><img src="images/nkde 1.PNG" class="img-fluid"></p>
+<p><strong><em>Network KDE with KMeans Clustering map:</em></strong></p>
+<p><img src="images/nkde 2.PNG" class="img-fluid"></p>
+<p>Both maps offer visualization of density patterns along the road network, however it is much more enhanced with the kmeans clustering map. Users have the flexibility to select the kernel method they prefer to use for calculating the KDE. Additionally, the interface offers three slider options to further refine the analysis. Two sliders control the lixel length, with the minimum lixel length always set to half of the total length. The third slider allows users to adjust the bandwidth for kernel density estimation.</p>
+<p>To generate the KDE map according to their preferences, users must press the submit button after configuring the desired settings.</p>
+</section>
+<section id="kg-function-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="kg-function-analysis">5.3 K/G Function Analysis</h3>
+<p>The final tab within NSPPA is the K/G Function Analysis, utilized to evaluate whether a set of points exhibits more or less clustering than expected from a given distribution.</p>
+<p><img src="images/kg.PNG" class="img-fluid"></p>
+<p>Within this tab, users can choose between two main plots: the K function or the G function, each offering unique perspectives on point clustering. Additionally, users have the flexibility to focus the analysis on a specific province.</p>
+<p>Further customization is facilitated through slider options for parameters of the K and G functions. These parameters include the start, end, and step values, as well as width and simulations. To assist users in understanding these parameters, explanations are provided within the application page.</p>
+<p>To generate the graphs according to their preferences, users must press the submit button after configuring the desired settings.</p>
+</section>
+</section>
+<section id="spatial-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-autocorrelation">6. Spatial Autocorrelation</h2>
+<p>Users can navigate to this page by clicking the ” Spatial Autocorrelation ” tab. This page has a tabset with three tabs. The first tab is an introduction tab. This tab tells the user about the features offered in the following tabs.</p>
+<section id="global-spatial-autocorrelation" class="level3">
+<h3 class="anchored" data-anchor-id="global-spatial-autocorrelation">6.1 Global Spatial Autocorrelation</h3>
+<p>The second tab within the Spatial Autocorrelation module is dedicated to Global Spatial Autocorrelation analysis.</p>
+<p><img src="images/moran i global.PNG" class="img-fluid"></p>
+<p>Here, users can conduct Monte Carlo simulations of two key measures: Moran’s I or Geary’s C, to assess spatial patterns within their data. Following the simulations, users can visualize the results through a histogram, providing a graphical representation of the spatial autocorrelation measures.</p>
+<p><img src="images/monte carlo.PNG" class="img-fluid"></p>
+<p>In addition to graphical representation, users can also view the results in text format. To tailor the analysis to their specific needs, users have the option to customize parameters such as the number of Monte Carlo simulations to run and the number of bins for the histogram.</p>
+</section>
+<section id="local-spatial-autocorrelation" class="level3">
+<h3 class="anchored" data-anchor-id="local-spatial-autocorrelation">6.2 Local Spatial Autocorrelation</h3>
+<p>The final tab of the Spatial Autocorrelation module is dedicated to Local Spatial Autocorrelation analysis, offering users a range of analytical options.</p>
+<section id="local-morans-i" class="level4">
+<h4 class="anchored" data-anchor-id="local-morans-i">6.2.1 Local Moran’s I</h4>
+<p><img src="images/local moran i.PNG" class="img-fluid"></p>
+<p>Firstly, users can plot Local Moran’s I statistics and have the flexibility to choose from seven statistics, which are:</p>
+<ul>
+<li><p><strong>ii:</strong> Observed Local Moran’s I statistic.</p></li>
+<li><p><strong>eii:</strong> Expected value under spatial randomness.</p></li>
+<li><p><strong>var_ii:</strong> Variance of Local Moran’s I.</p></li>
+<li><p><strong>z_ii:</strong> Standard deviate of observed value.</p></li>
+<li><p><strong>p_ii:</strong> Two-tailed p-value for observed value.</p></li>
+<li><p><strong>p_ii_sim:</strong> Simulated two-tailed p-value.</p></li>
+<li><p><strong>p_folded_sim:</strong> Folded simulated p-value, useful for asymmetrical distributions.</p></li>
+</ul>
+<p>Furthermore, users can customize their analysis by selecting the number of simulations to derive contiguity and choosing the type of data classification. By default, the classification type is set to “pretty”.</p>
+</section>
+<section id="lisa-map" class="level4">
+<h4 class="anchored" data-anchor-id="lisa-map">6.2.2 LISA Map</h4>
+<p><img src="images/lisa map.PNG" class="img-fluid"></p>
+<p>Users can also choose to visualize the Local Indicators of Spatial Association (LISA) map. On this map, only provinces that exhibit statistical significance are displayed.</p>
+</section>
+<section id="getis-ord-gi" class="level4">
+<h4 class="anchored" data-anchor-id="getis-ord-gi">6.2.3 Getis-Ord Gi*</h4>
+<p><img src="images/gi..PNG" class="img-fluid"></p>
+<p>Next, similar to Local Moran’s I, users can plot Getis-Ord Gi* statistics and have the flexibility to choose from six statistics, which are:</p>
+<ul>
+<li><p><strong>gi_star:</strong> Observed Getis-Ord Gi* statistic.</p></li>
+<li><p><strong>e_gi:</strong> Expected value under spatial randomness.</p></li>
+<li><p><strong>var_gi:</strong> Variance of Gi*.</p></li>
+<li><p><strong>p-value:</strong> p-value associated with the observed Gi* statistic.</p></li>
+<li><p><strong>p_sim:</strong> Simulated two-tailed p-value for observed Gi* statistic.</p></li>
+<li><p><strong>p_folded_sim:</strong> Folded simulated p-value.</p></li>
+</ul>
+<p>Furthermore, users can customize their analysis by selecting the number of simulations to derive contiguity and choosing the type of data classification. By default, the classification type is set to “pretty”.</p>
+</section>
+<section id="hcsa-map" class="level4">
+<h4 class="anchored" data-anchor-id="hcsa-map">6.2.3 HCSA Map</h4>
+<p><img src="images/hcsa.PNG" class="img-fluid"></p>
+<p>The last option is to visualize hot and cold spots through the Hot and Cold Spot Analysis (HCSA) map. Similar to the LISA map, this visualization tool highlights provinces that demonstrate statistical significance.</p>
+</section>
+</section>
+</section>
 <section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">5. Data</h2>
+<h2 class="anchored" data-anchor-id="data">7. Data</h2>
 <p>This page allows the user to better understand the data that was used for this application. There is a tabset with three tabs where each represents the three key sets of data that were used. Each tab allows you to view the data in the form of a table, like so:</p>
 <p><img src="images/clipboard-667310276.png" class="img-fluid"></p>
-<p>You could sort each of the columns ascendingly and descendingly, and also search for particular entries.</p>
+<p>You could sort each of the columns in ascending or descending order, and also search for particular entries.</p>
 
 
 </section>

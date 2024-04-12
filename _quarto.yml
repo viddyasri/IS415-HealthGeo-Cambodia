@@ -13,6 +13,8 @@ website:
         href: "Project/Poster.html"
       - text: "User Guide"
         href: "Guide/User-Guide.html"
+      - text: "Shiny Application"
+        href: "https://viddyasris.shinyapps.io/healthgeo-shinyapp/"
       - text: "Prototype of Features"
         menu:
           - text: "Exploratory Data Analysis"

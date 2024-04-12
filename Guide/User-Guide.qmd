@@ -2,28 +2,38 @@
 title: "User Guide of our Shiny Application"
 execute: 
   warning: false
-date: "`r Sys.Date()`"
+date: 12 April 2024
 highlight-style: dracula
 ---
 
 In this document, we will be providing a guide on how to use our application HealthGeo Cambodia.
 
-We have the following pages on our application that we will be explaining one by one here:
+## 1. Navigation
+
+![](images/navigation.PNG)
+
+Upon accessing the application, users will encounter a navigation bar located at the top of the interface, providing easy access to various sections. There are a total of 6 tabs within the navigation bar, each serving a distinct purpose.
+
+We will be explaining these tabs in more detail in this guide:
 
 1.  Home Page
 2.  Exploratory Data Analysis - Health Facilities
 3.  Exploratory Data Analysis - Population
-4.  Network-Constrained Kernel Density Estimation
+4.  Network-Constrained Spatial Point Pattern Analysis
 5.  Spatial Autocorrelation
 6.  Data
 
-## 1. Home Page 
+## 2. Home Page
 
 ![](images/clipboard-1919762945.png)
 
-This page is a static page that provides users an overview of the problem statement that is being analysed and the data that is being used in this application. This acts as a primer for users' understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.
+This page is a static page that provides users an overview of the problem that is being analysed and the data that is being used in this application. This acts as a primer for users' understanding of the context so that they can better glean insights from the subsequent analytic tools provided in this application.
 
-## 2. Exploratory Data Analysis - Health Facilities
+::: callout-note
+All interpretations of maps in subsequent sections have been provided in the application itself.
+:::
+
+## 3. Exploratory Data Analysis - Health Facilities
 
 You can navigate to this page by clicking the " EDA - Health Facilities " tab. This page has a tabset with two tabs. The first tab is an introduction tab. This tab tells you about the features offered in this page.
 
@@ -31,7 +41,7 @@ You can navigate to this page by clicking the " EDA - Health Facilities " tab. T
 
 The next tab called "Maps" has a tabset of its own, where you can view either the Spatial Points map or the Choropleth map. There is a sidebar with filters to better filter out what you'd like to see on the map.
 
-### 2.1 Spatial Points map
+### 3.1 Spatial Points map
 
 This is how the page looks like when the user tries to view the Spatial Points map:
 
@@ -41,11 +51,11 @@ By default, the Spatial Points map will show the distribution of all 4 health fa
 
 The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.
 
-### 2.2 Sidebar
+### 3.2 Sidebar
 
 The sidebar has 4 dropdowns and 4 checkboxes.
 
-#### 2.2.1 Drop downs
+#### 3.2.1 Drop downs
 
 The drop downs are for the user to choose the region they are interested in investigating.
 
@@ -59,7 +69,7 @@ Provinces are the largest grouping of regions in Cambodia, and it consists of sm
 
 [Using all drop downs one after another]{.underline}
 
-When you select a province, all the options for the child drop downs, which are districts, communes, and villages dropdowns, will be filtered to only include regions part of that province. Hence, when province kampot is chosen, only districts part of kamport will be shown as options for the district dropdown.
+When you select a province, all the options for the child drop downs, which are districts, communes, and villages drop downs, will be filtered to only include regions part of that province. Hence, when province Kampot is chosen, only districts part of Kampot will be shown as options for the district drop down.
 
 ![](images/clipboard-3859864751.png)
 
@@ -75,17 +85,17 @@ There might be many child regions with similar names that are from different par
 
 The user can choose to just select one of the 4 drop downs. They can just select a province, commune, village or district . This would be **ideal if they already knew what region** they wanted to investigate.
 
-#### 2.2.2 Checkboxes
+#### 3.2.2 Checkboxes
 
-There are 4 checkboxes representing the 4 types of health facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in investigating.
+There are 4 checkboxes representing the 4 types of healthcare facilities that we are investigating. You can click as many to as little boxes as you prefer - based on which type of facility/facilities you are interested in examining.
 
 The types of facilities selected are directly reflected in the legend of the map as shown below:
 
 ![](images/clipboard-1154292213.png)
 
-### 2.1 Choropleth map
+### 3.3 Choropleth map
 
-This choropleth map visualises the difference in the number of health facilities between the regions that are investigated. The spatial points map, however, visualises the individual discrete points whilst the choropleth map visualises the number of facilities in totality.
+This choropleth map visualises the difference in the number of healthcare facilities between the regions that are investigated. The spatial points map visualises the individual discrete points whilst the choropleth map visualises the number of facilities in its totality.
 
 This is how the choropleth map can look like:
 
@@ -93,11 +103,11 @@ This is how the choropleth map can look like:
 
 The map is interactive, hence, the user can zoom in or out and click on the regions or the dots representing the facilities to get more details.
 
-By default, the user views the entirety of cambodia.
+By default, the user views the entirety of Cambodia.
 
 In addition to the options present in the sidebar, we also have a couple other options that users can leverage to customize the map they are viewing.
 
-They can choose the color palate that is the most aesthetically pleasing and utilitarian for them. They can choose the type of data categorisation they prefer, and the number of the data categories they would want from 2 to 10.
+They can choose the color palette that is the most aesthetically pleasing and utilitarian for them. They can also choose the type of data classification they prefer, and the number of the data categories they would want from 2 to 10.
 
 [Data categorization options:]{.underline}
 
@@ -135,17 +145,17 @@ They can choose the color palate that is the most aesthetically pleasing and uti
 
     ![](images/clipboard-982731566.png)
 
-## 3. Exploratory Data Analysis - Population
+## 4. Exploratory Data Analysis - Population
 
-In this section, we will be visualising the differences in population indicators between provinces in Cambodia.
+In this section, users can visualise the differences in population indicators between provinces in Cambodia.
 
-This page has a tabset with two tabs, the first is the introduction explaining what this EDA is about.
+This page has a tabset with two tabs, the first is the introduction explaining what this feature is about.
 
-### 3.1 Introduction
+### 4.1 Introduction
 
 ![](images/clipboard-678945791.png)
 
-### 3.2 Choropleth map
+### 4.2 Choropleth map
 
 The second tab in this page is the choropleth map itself:
 
@@ -155,7 +165,7 @@ The map is interactive, hence, the user can zoom in or out and click on the regi
 
 This choropleth map visualizes the differences in population indicators between provinces. These indicators include mortality rate of newborns, mortality rates of children under 5, and literacy rates.
 
-### 3.3 Sidebar
+### 4.3 Sidebar
 
 In the sidebar, we have options that the user can select to customise their map.
 
@@ -165,10 +175,126 @@ In the sidebar, we have options that the user can select to customise their map.
 
 The utility of the inputs color palette, number of bins and classification style remains the same as the previous choropleth map.
 
-## 5. Data
+## 5. Network Constrained Spatial Point Pattern Analysis (NSPPA)
+
+Users can navigate to this page by clicking the " NSPPA " tab. This page has a tabset with four tabs. The first tab is an introduction tab. This tab tells the user about the features offered in the following tabs.
+
+### 5.1 Basic Plot
+
+The second tab in NSPPA presents users with a basic plot—an interactive point map illustrating the distribution of facility points across the road network. This visual representation offers users insights into the spatial arrangement of facilities within the specified area.
+
+![](images/basic%20plot.PNG)
+
+By hovering over individual points, users can access detailed information such as the facility name and category. Additionally, users have the flexibility to focus their analysis on a specific province and category of facility
+
+### 5.2 Network Constrained Kernel Density Estimation
+
+The third tab is the Network Constrained Kernel Density Estimation (KDE), a specialized spatial analysis technique tailored to estimate the density of point events along a network, such as a road network.
+
+Within this tab, users encounter two main types of Network KDE maps.
+
+***Simple Network KDE Map:***
+
+![](images/nkde%201.PNG)
+
+***Network KDE with KMeans Clustering map:***
+
+![](images/nkde%202.PNG)
+
+Both maps offer visualization of density patterns along the road network, however it is much more enhanced with the kmeans clustering map. Users have the flexibility to select the kernel method they prefer to use for calculating the KDE. Additionally, the interface offers three slider options to further refine the analysis. Two sliders control the lixel length, with the minimum lixel length always set to half of the total length. The third slider allows users to adjust the bandwidth for kernel density estimation.
+
+To generate the KDE map according to their preferences, users must press the submit button after configuring the desired settings.
+
+### 5.3 K/G Function Analysis
+
+The final tab within NSPPA is the K/G Function Analysis, utilized to evaluate whether a set of points exhibits more or less clustering than expected from a given distribution.
+
+![](images/kg.PNG)
+
+Within this tab, users can choose between two main plots: the K function or the G function, each offering unique perspectives on point clustering. Additionally, users have the flexibility to focus the analysis on a specific province.
+
+Further customization is facilitated through slider options for parameters of the K and G functions. These parameters include the start, end, and step values, as well as width and simulations. To assist users in understanding these parameters, explanations are provided within the application page.
+
+To generate the graphs according to their preferences, users must press the submit button after configuring the desired settings.
+
+## 6. Spatial Autocorrelation
+
+Users can navigate to this page by clicking the " Spatial Autocorrelation " tab. This page has a tabset with three tabs. The first tab is an introduction tab. This tab tells the user about the features offered in the following tabs.
+
+### 6.1 Global Spatial Autocorrelation
+
+The second tab within the Spatial Autocorrelation module is dedicated to Global Spatial Autocorrelation analysis.
+
+![](images/moran%20i%20global.PNG)
+
+Here, users can conduct Monte Carlo simulations of two key measures: Moran's I or Geary's C, to assess spatial patterns within their data. Following the simulations, users can visualize the results through a histogram, providing a graphical representation of the spatial autocorrelation measures.
+
+![](images/monte%20carlo.PNG)
+
+In addition to graphical representation, users can also view the results in text format. To tailor the analysis to their specific needs, users have the option to customize parameters such as the number of Monte Carlo simulations to run and the number of bins for the histogram.
+
+### 6.2 Local Spatial Autocorrelation
+
+The final tab of the Spatial Autocorrelation module is dedicated to Local Spatial Autocorrelation analysis, offering users a range of analytical options.
+
+#### 6.2.1 Local Moran's I
+
+![](images/local%20moran%20i.PNG)
+
+Firstly, users can plot Local Moran's I statistics and have the flexibility to choose from seven statistics, which are:
+
+-   **ii:** Observed Local Moran's I statistic.
+
+-   **eii:** Expected value under spatial randomness.
+
+-   **var_ii:** Variance of Local Moran's I.
+
+-   **z_ii:** Standard deviate of observed value.
+
+-   **p_ii:** Two-tailed p-value for observed value.
+
+-   **p_ii_sim:** Simulated two-tailed p-value.
+
+-   **p_folded_sim:** Folded simulated p-value, useful for asymmetrical distributions.
+
+Furthermore, users can customize their analysis by selecting the number of simulations to derive contiguity and choosing the type of data classification. By default, the classification type is set to "pretty".
+
+#### 6.2.2 LISA Map
+
+![](images/lisa%20map.PNG)
+
+Users can also choose to visualize the Local Indicators of Spatial Association (LISA) map. On this map, only provinces that exhibit statistical significance are displayed.
+
+#### 6.2.3 Getis-Ord Gi\*
+
+![](images/gi..PNG)
+
+Next, similar to Local Moran's I, users can plot Getis-Ord Gi\* statistics and have the flexibility to choose from six statistics, which are:
+
+-   **gi_star:** Observed Getis-Ord Gi\* statistic.
+
+-   **e_gi:** Expected value under spatial randomness.
+
+-   **var_gi:** Variance of Gi\*.
+
+-   **p-value:** p-value associated with the observed Gi\* statistic.
+
+-   **p_sim:** Simulated two-tailed p-value for observed Gi\* statistic.
+
+-   **p_folded_sim:** Folded simulated p-value.
+
+Furthermore, users can customize their analysis by selecting the number of simulations to derive contiguity and choosing the type of data classification. By default, the classification type is set to "pretty".
+
+#### 6.2.3 HCSA Map
+
+![](images/hcsa.PNG)
+
+The last option is to visualize hot and cold spots through the Hot and Cold Spot Analysis (HCSA) map. Similar to the LISA map, this visualization tool highlights provinces that demonstrate statistical significance.
+
+## 7. Data
 
 This page allows the user to better understand the data that was used for this application. There is a tabset with three tabs where each represents the three key sets of data that were used. Each tab allows you to view the data in the form of a table, like so:
 
 ![](images/clipboard-667310276.png)
 
-You could sort each of the columns ascendingly and descendingly, and also search for particular entries.
+You could sort each of the columns in ascending or descending order, and also search for particular entries.
